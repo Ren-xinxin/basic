@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @className GenericTest
@@ -42,5 +44,41 @@ public class GenericTest {
             set.add(random.nextInt(20) + 1);
         }
         System.out.println(set);
+    }
+
+    /**
+     * crate a array with 20 phone numbers
+     * @author lf
+     * @time 2019/6/27 17:52
+     */
+    @Test
+    public void test3() {
+        //create phones set
+        Set<String> phones = new HashSet<>();
+        //create random object
+        Random random = new Random();
+        //while phones' size less than 20
+        while (phones.size() < 20) {
+            //create string builder object
+            StringBuilder sb = new StringBuilder();
+            //append prefix
+            sb.append(13);
+            //append numbers
+            for (int i = 0; i < 9; i++) {
+                sb.append(random.nextInt(10));
+            }
+            //add phone number to the set
+            phones.add(sb.toString());
+        }
+        //print phones
+        System.out.println(phones);
+        //get phones' stream
+        phones.stream()
+                //get phone's number length
+                .map(String::length)
+                //collect to list
+                .collect(Collectors.toList())
+                //print the specific phone number length
+                .forEach(System.out::println);
     }
 }
