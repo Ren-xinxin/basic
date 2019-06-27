@@ -11,9 +11,14 @@ import java.util.Random;
  * @author lf
  * @time 2019/6/26 8:31
  **/
-
+@SuppressWarnings("ALL")
 public class GenericTest {
 
+    /**
+     * test1
+     * @author lf
+     * @time 2019/6/27 17:47
+     */
     @Test
     public void test1() {
         Float f1 = 1.0f;
