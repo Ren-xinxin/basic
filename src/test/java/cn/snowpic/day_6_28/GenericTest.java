@@ -41,5 +41,6 @@ public class GenericTest {
     public void test3() {
         System.out.println(2 & 3);
         System.out.println(-2 >> 1);
+        System.out.println("I am in home");
     }
 }
