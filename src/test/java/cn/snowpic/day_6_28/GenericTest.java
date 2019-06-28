@@ -31,4 +31,15 @@ public class GenericTest {
         System.out.println("I am confused about something," +
                 "but I can't resolve it");
     }
+
+    /**
+     * test3 bit operate 'and'
+     * @author lf
+     * @time 2019/6/28 16:40
+     */
+    @Test
+    public void test3() {
+        System.out.println(2 & 3);
+        System.out.println(-2 >> 1);
+    }
 }
