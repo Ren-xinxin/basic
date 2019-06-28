@@ -2,9 +2,7 @@ package cn.snowpic.day_6_26;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -80,5 +78,19 @@ public class GenericTest {
                 .collect(Collectors.toList())
                 //print the specific phone number length
                 .forEach(System.out::println);
+    }
+
+    /**
+     * test4
+     * @author lf
+     * @time 2019/6/28 8:55
+     */
+    @Test
+    public void test4() {
+        int[] ages = {2, 4, 6, 2, 32, 43, 1, 5};
+        Arrays.sort(ages);
+        for (int age : ages) {
+            System.out.println(age);
+        }
     }
 }
