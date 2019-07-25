@@ -2,6 +2,10 @@ package cn.snowpic.day_7_1;
 
 import org.junit.Test;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * @className GenericTest
  * @description generic test
@@ -18,6 +22,8 @@ public class GenericTest {
      */
     @Test
     public void test1() {
+        String ll = "I love programing ......";
+        System.out.println(ll);
     }
 
     /**
@@ -29,10 +35,33 @@ public class GenericTest {
     public void test2() {
         new B().m1();
     }
+
+
+    @Test
+    public void test3() throws InterruptedException {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(()->{
+            System.out.println("overlord......");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("nothing to do....");
+        });
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("I am god of the world......");
+            }
+        });
+
+        Thread.sleep(3000);
+    }
 }
 
 class A {
-    public static int i = 1;
+    public static int IIIII = 1;
 }
 
 class B extends C implements D {
