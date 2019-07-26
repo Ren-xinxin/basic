@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 
 /**
@@ -24,12 +25,24 @@ public class GenericTest {
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         m1("some message....");
     }
 
-    private static void m1(@NotNull String msg){
-        Assert.assertNotNull("params must not be null !",msg);
+    private static void m1(@NotNull String msg) {
+        Assert.assertNotNull("params must not be null !", msg);
         System.out.println(msg);
+    }
+
+    @Test
+    public void test3() {
+        double price = 1.0 - 0.1;
+        System.out.println(price);
+        System.out.println("price = " + price);
+    }
+
+    @Test
+    public void test4(){
+
     }
 }
