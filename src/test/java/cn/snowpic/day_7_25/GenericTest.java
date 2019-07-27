@@ -43,6 +43,9 @@ public class GenericTest {
 
     @Test
     public void test4(){
+        System.out.println("Intellij IDEA ultimate.....");
+        System.out.println("I am confused about something..");
+        System.out.println("I have got a job in isoftstone,but I am actually unhappy.I don't know why...");
 
     }
 }
