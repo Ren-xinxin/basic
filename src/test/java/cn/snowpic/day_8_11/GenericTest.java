@@ -130,5 +130,6 @@ public class GenericTest {
     @Test
     public void test5(){
         System.out.println("wtf");
+        System.out.println("something bad...");
     }
 }
