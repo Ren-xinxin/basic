@@ -126,4 +126,9 @@ public class GenericTest {
     static final class A {
 
     }
+
+    @Test
+    public void test5(){
+        System.out.println("wtf");
+    }
 }
