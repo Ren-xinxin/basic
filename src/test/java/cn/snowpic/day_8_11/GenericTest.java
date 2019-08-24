@@ -128,8 +128,14 @@ public class GenericTest {
     }
 
     @Test
-    public void test5(){
+    public void test5() {
         System.out.println("wtf");
         System.out.println("something bad...");
+    }
+
+    @Test
+    public void test6() {
+        System.out.println("I love empty....");
+        System.out.println("");
     }
 }
