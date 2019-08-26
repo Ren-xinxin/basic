@@ -230,15 +230,32 @@ public class GenericTest {
         RingBuffer<LongEvent> ringBuffer = disruptor.getRingBuffer();
 
         LongEventProvider provider = new LongEventProvider(ringBuffer);
+        long start = System.currentTimeMillis();
 
-        for (long i = 0; i < 100; i++) {
+        for (long i = 0; i < 10000; i++) {
             provider.putData(i);
         }
 
         disruptor.shutdown();
+        System.out.println("time pass with " + (System.currentTimeMillis() - start));
         pool.shutdown();
 
         Thread.sleep(3000);
+    }
+
+    /**
+     * test6
+     * @author lf
+     * @time 2019/8/24 23:58
+     */
+    @Test
+    public void test6() {
+        long start = System.currentTimeMillis();
+        int k;
+        for (int i = 0; i < 1000000; i++) {
+            k = i;
+        }
+        System.out.println("time passed with " + (System.currentTimeMillis() - start));
     }
 }
 
