@@ -3,6 +3,8 @@ package cn.snowpic.day_9_21;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,8 +57,9 @@ public class GenericTest {
         root.add(new Composite("composite1"));
         Composite composite2 = new Composite("composite2");
         composite2.add(new Leaf("leaf99"));
+        composite2.operation();
         root.add(composite2);
-
+        root.operation();
         System.out.println(root);
     }
 }
@@ -75,6 +78,8 @@ class Composite implements Component {
     private String name;
 
     private List<Component> child = new ArrayList<>();
+
+    private int a = 4;
 
     public Composite(String name) {
         this.name = name;
@@ -102,10 +107,11 @@ class Composite implements Component {
 
     @Override
     public String toString() {
-        return "Composite{" +
-                "name='" + name + '\'' +
-                ", child=" + child +
-                '}';
+        return "{" +
+                "\"name\":\"" + name + "\"" +
+                ",\"child\":" + child +
+                ",\"a\":" + a +
+                "}";
     }
 }
 
@@ -139,11 +145,9 @@ class Leaf implements Component {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"name\":\"")
-                .append(name).append('\"');
-        sb.append('}');
-        return sb.toString();
+        return "{" +
+                "\"name\":\"" + name + "\"" +
+                "}";
     }
 }
 
