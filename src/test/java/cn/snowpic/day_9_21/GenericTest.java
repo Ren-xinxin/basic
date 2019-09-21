@@ -2,6 +2,9 @@ package cn.snowpic.day_9_21;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @className GenericTest
  * @description
@@ -32,6 +35,120 @@ public class GenericTest {
         Singer proxy = new ProxySinger(weiJin);
 
         proxy.sing();
+    }
+
+    @Test
+    public void test3() {
+        A a = new A();
+    }
+
+    /**
+     * Component design pattern
+     * @author lf
+     * @time 2019/9/21 18:10
+     */
+    @Test
+    public void test4() {
+        Component root = new Composite("root");
+        root.add(new Leaf("leaf1"));
+        root.add(new Leaf("leaf2"));
+        root.add(new Composite("composite1"));
+        Composite composite2 = new Composite("composite2");
+        composite2.add(new Leaf("leaf99"));
+        root.add(composite2);
+
+        System.out.println(root);
+    }
+}
+
+interface Component {
+    void operation();
+
+    void add(Component c);
+
+    void remove(Component c);
+
+    Component getChild(int index);
+}
+
+class Composite implements Component {
+    private String name;
+
+    private List<Component> child = new ArrayList<>();
+
+    public Composite(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void operation() {
+        System.out.println(String.format("Composite %s is operating..", this.name));
+    }
+
+    @Override
+    public void add(Component c) {
+        child.add(c);
+    }
+
+    @Override
+    public void remove(Component c) {
+        child.remove(c);
+    }
+
+    @Override
+    public Component getChild(int index) {
+        return child.get(index);
+    }
+
+    @Override
+    public String toString() {
+        return "Composite{" +
+                "name='" + name + '\'' +
+                ", child=" + child +
+                '}';
+    }
+}
+
+class Leaf implements Component {
+
+    private String name;
+
+    public Leaf(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void operation() {
+        System.out.println(String.format("Leaf %s is operating ", this.name));
+    }
+
+    @Override
+    public void add(Component c) {
+        System.out.println("Leaf can't add child..");
+    }
+
+    @Override
+    public void remove(Component c) {
+        System.out.println("Leaf can't remove child...");
+    }
+
+    @Override
+    public Component getChild(int index) {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"name\":\"")
+                .append(name).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
+}
+
+class A {
+    private void m1() {
     }
 }
 
