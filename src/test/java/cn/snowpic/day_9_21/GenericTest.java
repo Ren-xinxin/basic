@@ -79,6 +79,51 @@ public class GenericTest {
         System.out.println("flyweight == flyweight2 = " + (flyweight == flyweight2));
         flyweight.operate();
     }
+
+    /**
+     * strategy design pattern
+     * @author lf
+     * @time 2019/9/21 21:35
+     */
+    @Test
+    public void test6() {
+        Context context1 = new Context(new ConcreteStrategyA());
+        Context context2 = new Context(new ConcreteStrategyB());
+
+        context1.operate();
+        context2.operate();
+    }
+}
+
+interface Strategy {
+    void operate();
+}
+
+class ConcreteStrategyA implements Strategy {
+    @Override
+    public void operate() {
+        System.out.println("concrete strategy A is operating...");
+    }
+}
+
+class ConcreteStrategyB implements Strategy {
+    @Override
+    public void operate() {
+        System.out.println("concrete strategy B is operating...");
+    }
+}
+
+class Context implements Strategy {
+    private Strategy strategy;
+
+    public Context(Strategy strategy) {
+        this.strategy = strategy;
+    }
+
+    @Override
+    public void operate() {
+        this.strategy.operate();
+    }
 }
 
 abstract class Flyweight {
