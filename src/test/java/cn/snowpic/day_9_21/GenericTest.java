@@ -93,6 +93,74 @@ public class GenericTest {
         context1.operate();
         context2.operate();
     }
+
+    /**
+     * template design pattern
+     * @author lf
+     * @time 2019/9/21 22:18
+     */
+    @Test
+    public void test7() {
+        Person person1 = new Student();
+        Person person2 = new Teacher();
+
+        person1.goToSchool();
+        person2.goToSchool();
+    }
+}
+
+abstract class Person {
+    public final void goToSchool() {
+        dress();
+        eatBreakfast();
+        takeSomething();
+    }
+
+    public abstract void dress();
+
+    public abstract void eatBreakfast();
+
+    public abstract void takeSomething();
+
+}
+
+class Teacher extends Person {
+    @Override
+    public void dress() {
+        System.out.println("dress clothes that his wife has prepared");
+    }
+
+    @Override
+    public void eatBreakfast() {
+        System.out.println("eat some chicken that is good for his health");
+    }
+
+    @Override
+    public void takeSomething() {
+        System.out.println("take test paper..[happy feeling]");
+    }
+
+    @Override
+    public String toString() {
+        return "{}";
+    }
+}
+
+class Student extends Person {
+    @Override
+    public void dress() {
+        System.out.println("dress clothes that mother has prepared");
+    }
+
+    @Override
+    public void eatBreakfast() {
+        System.out.println("eat some fruit that is good for his health");
+    }
+
+    @Override
+    public void takeSomething() {
+        System.out.println("take homework..[sad feeling]");
+    }
 }
 
 interface Strategy {
