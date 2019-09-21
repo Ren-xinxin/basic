@@ -3,8 +3,7 @@ package cn.snowpic.day_9_21;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -57,15 +56,75 @@ public class GenericTest {
         root.add(new Composite("composite1"));
         Composite composite2 = new Composite("composite2");
         composite2.add(new Leaf("leaf99"));
-        composite2.operation();
+        composite2.operate();
         root.add(composite2);
-        root.operation();
+        root.operate();
         System.out.println(root);
+    }
+
+    /**
+     * Flyweight design pattern
+     * @author lf
+     * @time 2019/9/21 21:16
+     */
+    @Test
+    public void test5() {
+        FlyweightFactory factory = new FlyweightFactory();
+
+        Flyweight flyweight = factory.getFlyweight("a");
+        System.out.println(factory.getFlyweightsSize());
+        Flyweight flyweight2 = factory.getFlyweight("a");
+        System.out.println(factory.getFlyweightsSize());
+
+        System.out.println("flyweight == flyweight2 = " + (flyweight == flyweight2));
+        flyweight.operate();
+    }
+}
+
+abstract class Flyweight {
+    abstract void operate();
+}
+
+class ConcreteFlyweight extends Flyweight {
+
+    private String msg;
+
+    public ConcreteFlyweight(String msg) {
+        this.msg = msg;
+    }
+
+    @Override
+    void operate() {
+        System.out.println("concrete flyweight = " + msg);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"msg\":\"" + msg + "\"" +
+                "}";
+    }
+}
+
+class FlyweightFactory {
+    private HashMap<Object, Flyweight> flyweightHashMap = new HashMap<>();
+
+    public Flyweight getFlyweight(Object key) {
+        Flyweight flyweight = this.flyweightHashMap.get(key);
+        if (flyweight == null) {
+            flyweight = new ConcreteFlyweight((String) key);
+            this.flyweightHashMap.put(key, flyweight);
+        }
+        return flyweight;
+    }
+
+    public int getFlyweightsSize() {
+        return this.flyweightHashMap.size();
     }
 }
 
 interface Component {
-    void operation();
+    void operate();
 
     void add(Component c);
 
@@ -86,7 +145,7 @@ class Composite implements Component {
     }
 
     @Override
-    public void operation() {
+    public void operate() {
         System.out.println(String.format("Composite %s is operating..", this.name));
     }
 
@@ -124,7 +183,7 @@ class Leaf implements Component {
     }
 
     @Override
-    public void operation() {
+    public void operate() {
         System.out.println(String.format("Leaf %s is operating ", this.name));
     }
 
