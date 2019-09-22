@@ -2,7 +2,10 @@ package cn.snowpic.day_9_22;
 
 import org.junit.Test;
 
+import javafx.scene.paint.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -88,6 +91,58 @@ public class GenericTest {
 
     }
 
+    /**
+     * state design pattern
+     * @author lf
+     * @time 2019/9/22 18:02
+     */
+    @Test
+    public void test6(){
+        Context context = new Context(Color.PURPLE);
+        State state1 = context.pull();
+        System.out.println("state1 = " + state1);
+        State state2 = context.push();
+        System.out.println("state2 = " + state2);
+    }
+}
+
+abstract class State {
+
+    protected final List<Color> colors = Arrays.asList(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN, Color.PURPLE);
+
+    public abstract State pull();
+
+    public abstract State push();
+}
+
+class Context extends State {
+
+    private Color color;
+
+    public Context(Color color) {
+        this.color = color;
+    }
+
+    @Override
+    public State pull() {
+        int i = colors.indexOf(color);
+        int index = --i < 0 ? colors.size() - 1 : i;
+        return new Context(colors.get(index));
+    }
+
+    @Override
+    public State push() {
+        int i = colors.indexOf(color);
+        int index = ++i > colors.size() - 1 ? 0 : i;
+        return new Context(colors.get(index));
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"color\":" + color.toString() +
+                "}";
+    }
 }
 
 class Caretaker {
@@ -120,7 +175,7 @@ class Person {
     }
 
     public Person createMemento() {
-        return new Person(this.name, this.age, this.height, this.weight);
+        return new Person(name, age, height, weight);
     }
 
     public void restore(Person person) {
