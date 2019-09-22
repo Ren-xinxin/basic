@@ -97,12 +97,70 @@ public class GenericTest {
      * @time 2019/9/22 18:02
      */
     @Test
-    public void test6(){
+    public void test6() {
         Context context = new Context(Color.PURPLE);
         State state1 = context.pull();
         System.out.println("state1 = " + state1);
         State state2 = context.push();
         System.out.println("state2 = " + state2);
+    }
+
+    /**
+     * visitor design pattern
+     * @author lf
+     * @time 2019/9/22 18:02
+     */
+    @Test
+    public void test7() {
+        Element elementA = new ElementA();
+        Element elementB = new ElementB();
+
+        IVisit visitor = new Visitor();
+
+        elementA.accept(visitor);
+        elementB.accept(visitor);
+    }
+
+}
+
+interface Element {
+    void accept(IVisit visit);
+
+    void doSomething();
+}
+
+class ElementA implements Element {
+    @Override
+    public void accept(IVisit visit) {
+        visit.visit(this);
+    }
+
+    @Override
+    public void doSomething() {
+        System.out.println("I am element A");
+    }
+}
+
+class ElementB implements Element {
+    @Override
+    public void accept(IVisit visit) {
+        visit.visit(this);
+    }
+
+    @Override
+    public void doSomething() {
+        System.out.println("I am element B");
+    }
+}
+
+interface IVisit {
+    void visit(Element element);
+}
+
+class Visitor implements IVisit {
+    @Override
+    public void visit(Element elementA) {
+        elementA.doSomething();
     }
 }
 
