@@ -5,8 +5,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 /**
  * @className GenericTest
@@ -54,6 +52,88 @@ public class GenericTest {
             System.out.println(product);
         }
     }
+
+    /**
+     * command design pattern
+     * @author lf
+     * @time 2019/9/22 14:54
+     */
+    @Test
+    public void test4() {
+        Tv tv = new Tv();
+        Command on = new CommandOn(tv);
+        Command off = new CommandOff(tv);
+        Command change = new CommandChannelChange(tv);
+        on.execute();
+        change.execute();
+        off.execute();
+    }
+}
+
+class CommandChannelChange implements Command {
+    private Tv tv;
+
+    public CommandChannelChange(Tv tv) {
+        this.tv = tv;
+    }
+
+    @Override
+    public void execute() {
+        this.tv.channelChange();
+    }
+}
+
+class CommandOff implements Command {
+    private Tv tv;
+
+    public CommandOff(Tv tv) {
+        this.tv = tv;
+    }
+
+    @Override
+    public void execute() {
+        this.tv.turnOff();
+    }
+}
+
+class CommandOn implements Command {
+
+    private Tv tv;
+
+    public CommandOn(Tv tv) {
+        this.tv = tv;
+    }
+
+    @Override
+    public void execute() {
+        this.tv.turnOn();
+    }
+}
+
+interface Command {
+    void execute();
+}
+
+/**
+ * command receiver
+ * @className Tv
+ * @author lf
+ * @time 2019/9/22 14:48
+ */
+class Tv {
+    private int channel = 0;
+
+    public void turnOn() {
+        System.out.println("television is turning on.");
+    }
+
+    public void turnOff() {
+        System.out.println("television is turning off.");
+    }
+
+    public void channelChange() {
+        System.out.println("television channel is changing to " + (++this.channel));
+    }
 }
 
 class Product {
@@ -79,7 +159,7 @@ class Product {
     }
 }
 
-class ProductIterator implements Iterator<Product>,Iterable<Product> {
+class ProductIterator implements Iterator<Product>, Iterable<Product> {
 
     private List<Product> products;
 
