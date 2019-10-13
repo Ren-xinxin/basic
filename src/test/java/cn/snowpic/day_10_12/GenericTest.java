@@ -8,8 +8,9 @@ import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.junit.Test;
 
+import java.security.SecureRandom;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 
 /**
  * @author lf
@@ -74,12 +75,43 @@ public class GenericTest {
         // delete recursive
         // client.deleteRecursive("/rxx");
 
-        client.createPersistent("/rxx","333");
+        client.createPersistent("/rxx", "333");
 
         Object data = client.readData("/rxx");
         System.out.println(data);
 
         client.close();
 
+    }
+
+    /**
+     * semaphore
+     *
+     * @author lf
+     * @time 2019/10/13 21:32
+     */
+    @Test
+    public void test3() throws InterruptedException {
+        // 主要用于限流
+        // 最多3个线程可以获取许可
+        Semaphore semaphore = new Semaphore(3);
+
+        ExecutorService pool = Executors.newFixedThreadPool(100);
+
+        for (int i = 0; i < 100; i++) {
+            pool.execute(() -> {
+                SecureRandom random = new SecureRandom();
+                try {
+                    semaphore.acquire();
+                    System.out.println("acquired...");
+                    TimeUnit.SECONDS.sleep(random.nextInt(3));
+                    semaphore.release();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        Thread.sleep(10000);
     }
 }
