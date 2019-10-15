@@ -5,7 +5,10 @@ package cn.snowpic.day_10_15;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.recipes.atomic.AtomicValue;
+import org.apache.curator.framework.recipes.atomic.DistributedAtomicInteger;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.curator.retry.RetryNTimes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,9 +56,8 @@ public class GenericTest {
      */
     @Test
     public void test1() throws Exception {
+        cf.blockUntilConnected();
         ExecutorService pool = Executors.newFixedThreadPool(4);
-        byte[] bytes = cf.getData().forPath("/rxx");
-        System.out.println(new String(bytes));
 
         for (int i = 0; i < 100; i++) {
             pool.execute(() -> {
@@ -78,6 +80,35 @@ public class GenericTest {
                 }
             });
         }
+
+        TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+    }
+
+    /**
+     * distributed atomic integer
+     * @author lf
+     * @time 2019/10/15 21:27
+     */
+    @Test
+    public void test2() throws Exception {
+        cf.blockUntilConnected();
+        DistributedAtomicInteger count = new DistributedAtomicInteger(cf, "/atomic", new RetryNTimes(3, 1000));
+        ExecutorService pool = Executors.newFixedThreadPool(10);
+
+        for (int i = 0; i < 1000; i++) {
+            pool.execute(()->{
+                try {
+                    TimeUnit.SECONDS.sleep(new SecureRandom().nextInt(5));
+                    AtomicValue<Integer> increment = count.increment();
+                    // System.out.println("increment.succeeded() = " + increment.succeeded());
+                    System.out.println("increment.preValue() = " + increment.preValue());
+                    System.out.println("increment.postValue() = " + increment.postValue());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
 
         TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
     }
