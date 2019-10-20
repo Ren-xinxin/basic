@@ -37,6 +37,7 @@ public class GenericTest {
                 .connectionTimeoutMs(10000)
                 .build();
 
+        // start client
         cf.start();
     }
 
