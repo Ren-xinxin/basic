@@ -35,6 +35,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class GenericTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(GenericTest.class);
+
     @Test
     public void test1() throws Exception {
         Config config = new Config() {{
@@ -62,15 +64,14 @@ public class GenericTest {
     public void test2() {
         List<String> list = new ArrayList<>();
         long t0 = System.currentTimeMillis();
-        for (int i = 0; i < 5000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             list.add(UUID.randomUUID().toString());
         }
         System.out.println("..." + (System.currentTimeMillis() - t0));
         long t1 = System.currentTimeMillis();
         /*list.stream().sorted().forEach(s -> {
         });*/
-        list.parallelStream().sorted().forEach(s -> {
-        });
+        list.parallelStream().sorted().forEach(LOGGER::info);
         System.out.println("System.currentTimeMillis()-t1 = " + (System.currentTimeMillis() - t1));
     }
 }
