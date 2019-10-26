@@ -1,3 +1,4 @@
+/*
 package cn.snowpic.day_8_31;
 
 import com.alibaba.excel.ExcelWriter;
@@ -13,12 +14,14 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * @className GenericTest
  * @description
  * @author lf
  * @time 2019/8/31 19:58
- **/
+ **//*
+
 
 public class GenericTest {
 
@@ -53,3 +56,4 @@ public class GenericTest {
         excelWriter.finish();
     }
 }
+*/
