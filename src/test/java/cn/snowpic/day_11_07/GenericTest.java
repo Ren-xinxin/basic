@@ -21,6 +21,9 @@ public class GenericTest {
      */
     @Test
     public void test2() {
-
+        boolean b = "".equalsIgnoreCase("123");
+        System.out.println(b);
+        System.out.println(0>>>1);
+        System.out.println(Integer.MAX_VALUE);
     }
 }
