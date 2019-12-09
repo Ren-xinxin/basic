@@ -65,4 +65,35 @@ public class GenericTest {
             }
         }
     }
+
+    /**
+     * remove target value from a array
+     * @author lf
+     * @time 2019/12/10 0:04
+     */
+    @Test
+    public void test3() {
+        int[] arrays = new int[]{2, 3, 6, 5, 35, 23, 7, 3, 2, 22, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 66, 7};
+        System.out.println(Arrays.toString(rmTarget(arrays, 7)));
+    }
+
+    /**
+     * rm target
+     * @author lf
+     * @time 2019/12/10 0:03
+     * @param arrays arrays
+     * @param target target
+     * @return int[]
+     */
+    private int[] rmTarget(int[] arrays, int target) {
+        int i = 0;
+        for (int j = 0; j < arrays.length; j++) {
+            if (arrays[j] != target) {
+                arrays[i++] = arrays[j];
+            }
+        }
+        int[] result = new int[i];
+        System.arraycopy(arrays, 0, result, 0, i);
+        return result;
+    }
 }
