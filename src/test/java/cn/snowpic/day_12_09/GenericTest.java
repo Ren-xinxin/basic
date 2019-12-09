@@ -67,7 +67,7 @@ public class GenericTest {
     }
 
     /**
-     * remove target value from a array
+     * remove target value from an array
      * @author lf
      * @time 2019/12/10 0:04
      */
