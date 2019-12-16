@@ -58,7 +58,6 @@ public class GenericTest {
                 result[k++] = arrays1[i++];
             }
         }
-        System.out.println(i + " " + j + " " + k);
         return result;
     }
 
