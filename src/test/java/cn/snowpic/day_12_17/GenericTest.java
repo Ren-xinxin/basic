@@ -45,4 +45,36 @@ public class GenericTest {
         }
         return new int[]{-1, -1};
     }
+
+    /**
+     * get majority of an array
+     * @author lf
+     * @time 2019/12/17 23:16
+     */
+    @Test
+    public void test2() {
+        System.out.println(majority(new int[]{1, 2, 1, 3, 4, 5, 6, 7, 7, 9, 4, 4, 4, 4, 4}));
+    }
+
+    /**
+     * majority
+     * @author lf
+     * @time 2019/12/17 23:16
+     * @param arrays arrays
+     * @return int
+     */
+    private int majority(int[] arrays) {
+        // int majority = arrays[0];
+        int majority = -1;
+        int count = 0;
+        for (int i = 0; i < arrays.length; i++) {
+            if (count == 0 || majority == arrays[i]) {
+                count++;
+                majority = arrays[i];
+            } else {
+                count--;
+            }
+        }
+        return majority;
+    }
 }
