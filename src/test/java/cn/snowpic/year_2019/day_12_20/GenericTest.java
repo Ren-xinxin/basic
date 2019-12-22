@@ -68,6 +68,7 @@ public class GenericTest {
 
     /**
      * majority with partition solution
+     * todo It is wrong but I won't fix it.
      * @author lf
      * @time 2019/12/21 0:06
      * @param arrays arrays
