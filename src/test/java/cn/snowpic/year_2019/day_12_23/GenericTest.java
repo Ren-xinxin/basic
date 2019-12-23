@@ -6,6 +6,11 @@ package cn.snowpic.year_2019.day_12_23;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @className GenericTest
  * @description
@@ -46,5 +51,39 @@ public class GenericTest {
         }
         // 3 -> 5 011 110 [101]
         return xor ^ i;
+    }
+
+    /**
+     * test2
+     * @author lf
+     * @time 2019/12/23 22:10
+     */
+    @Test
+    public void test2() {
+        System.out.println(missingNumbers(new int[]{2, 3, 4, 5, 6, 1, 23, 5, 67}));
+    }
+
+    /**
+     * missing numbers
+     * @author lf
+     * @time 2019/12/23 21:38
+     * @param arrays arrays
+     * @return Integer[]
+     */
+    private List<Integer> missingNumbers(int[] arrays) {
+        int max = -1;
+        Set<Integer> hashSet = new HashSet<>();
+        List<Integer> result = new ArrayList<>();
+        // elephant
+        for (int i = 0; i < arrays.length; i++) {
+            hashSet.add(arrays[i]);
+            max = Math.max(max, arrays[i]);
+        }
+        for (int i = 0; i <= max; i++) {
+            if (!hashSet.contains(i)) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 }
