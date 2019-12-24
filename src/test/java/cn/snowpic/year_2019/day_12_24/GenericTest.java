@@ -13,7 +13,11 @@ import org.junit.Test;
  * @time 2019/12/24 20:20
  */
 public class GenericTest {
-
+    /**
+     * test1 of max one
+     * @author lf
+     * @time 2019/12/24 20:30
+     */
     @Test
     public void test1() {
         System.out.println(maxOne(new int[]{1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1}));
