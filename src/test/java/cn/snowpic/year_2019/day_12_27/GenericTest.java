@@ -6,6 +6,8 @@ package cn.snowpic.year_2019.day_12_27;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @className GenericTest
  * @description
@@ -79,5 +81,32 @@ public class GenericTest {
             }
         }
         return false;
+    }
+
+    /**
+     * test3 maximum of multiply between three elements
+     * @author lf
+     * @time 2019/12/27 21:23
+     */
+    @Test
+    public void test3() {
+        int multiply = maxMultiply(new int[]{5, 8, 3, 2, 6, 1});
+        System.out.println("multiply = " + multiply);
+    }
+
+    /**
+     * max multiply
+     * @author lf
+     * @time 2019/12/27 21:26
+     * @param array array
+     * @return int
+     */
+    private int maxMultiply(int[] array) {
+        if (array.length < 3) {
+            throw new IllegalArgumentException("The array must contains 3 elements at least");
+        }
+        Arrays.sort(array);
+        int len = array.length;
+        return array[len - 1] * array[len - 2] * array[len - 3];
     }
 }
