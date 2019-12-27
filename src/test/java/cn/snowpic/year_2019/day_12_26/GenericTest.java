@@ -19,10 +19,10 @@ public class GenericTest {
     @Test
     public void test1() {
         int[][] origin = {{1, 2, 3, 4}};
-        int[][] reshape = reshape(origin, 2, 2);
+        int[][] reshape = reshape(origin, 4, 1);
         // System.out.println("reshape = " + Arrays.toString(reshape));
-        for (int i = 0; i < reshape.length; i++) {
-            System.out.println(Arrays.toString(reshape[i]));
+        for (int[] shape : reshape) {
+            System.out.println(Arrays.toString(shape));
         }
     }
 
@@ -45,7 +45,9 @@ public class GenericTest {
         int[][] result = new int[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                result[i][j] = arrays[j / c1][j % c1];
+                // one line index
+                int index = i * column + j;
+                result[i][j] = arrays[index / c1][index % c1];
             }
         }
         return result;
