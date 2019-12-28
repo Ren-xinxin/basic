@@ -44,7 +44,7 @@ public class GenericTest {
             for (int j = (i + 1) - k; j <= i; j++) {
                 sum += array[j];
             }
-            maxAvg = Math.max(maxAvg, sum / (k * 1.0));
+            maxAvg = Math.max(maxAvg, sum * 1.0 / k);
         }
         return maxAvg;
     }
