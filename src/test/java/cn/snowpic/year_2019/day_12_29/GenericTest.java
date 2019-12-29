@@ -50,4 +50,31 @@ public class GenericTest {
         }
         return result;
     }
+
+    @Test
+    public void test2() {
+        boolean b1 = nonDecreaseArray(new int[]{4, 2, 3});
+        boolean b2 = nonDecreaseArray(new int[]{4, 2, 1});
+        System.out.println("b1 = " + b1);
+        System.out.println("b2 = " + b2);
+    }
+
+    /**
+     * non decrease array
+     * @author lf
+     * @time 2019/12/29 16:51
+     * @param array array
+     * @return boolean
+     */
+    private boolean nonDecreaseArray(int[] array) {
+        int count = 0;
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i + 1] < array[i] && count == 0) {
+                count++;
+            } else if (array[i + 1] < array[i] && count > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
