@@ -51,6 +51,11 @@ public class GenericTest {
         return result;
     }
 
+    /**
+     * test2
+     * @author lf
+     * @time 2019/12/29 17:00
+     */
     @Test
     public void test2() {
         boolean b1 = nonDecreaseArray(new int[]{4, 2, 3});
