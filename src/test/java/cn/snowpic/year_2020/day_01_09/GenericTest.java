@@ -2,9 +2,11 @@
  * Copyright(c) snowpic.cn 2019-2019.All rights reserved.
  */
 
-package cn.snowpic.year_2020.day_01_08;
+package cn.snowpic.year_2020.day_01_09;
 
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * generic test
@@ -46,5 +48,36 @@ public class GenericTest {
             }
         }
         return len == array.length - 1;
+    }
+
+    /**
+     * find pivot
+     * @author lf
+     * @time 2020-01-09 23:22
+     * @param array array
+     * @return int
+     */
+    private int findPivot(int[] array) {
+        int sum = Arrays.stream(array).sum();
+        int currentSum = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (currentSum == (sum - array[i] - currentSum)) {
+                return i;
+            }
+            currentSum += array[i];
+        }
+        return -1;
+    }
+
+    /**
+     * test2 of find pivot
+     * @author lf
+     * @time 2020-01-09 23:20
+     */
+    @Test
+    public void test2() {
+        int[] array1 = {1, 7, 3, 6, 5, 6};
+        int pivot1 = findPivot(array1);
+        System.out.println("pivot1 = " + pivot1);
     }
 }
