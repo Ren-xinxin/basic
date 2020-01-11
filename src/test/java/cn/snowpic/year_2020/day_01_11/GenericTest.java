@@ -34,14 +34,14 @@ public class GenericTest {
      */
     private boolean toeplitz(int[][] arrays) {
         for (int i = 0; i < arrays.length; i++) {
-            if (isToeplitz(arrays, i, 0)) {
+            if (isNotToeplitz(arrays, i, 0)) {
                 return false;
             }
             if (i > 0) {
                 continue;
             }
             for (int j = 1; j < arrays[i].length; j++) {
-                if (isToeplitz(arrays, i, j)) {
+                if (isNotToeplitz(arrays, i, j)) {
                     return false;
                 }
             }
@@ -59,7 +59,7 @@ public class GenericTest {
      * @param column column
      * @return boolean
      */
-    private boolean isToeplitz(int[][] arrays, int row, int column) {
+    private boolean isNotToeplitz(int[][] arrays, int row, int column) {
         int sameVal;
         sameVal = arrays[row][column];
         int tepI = row;
