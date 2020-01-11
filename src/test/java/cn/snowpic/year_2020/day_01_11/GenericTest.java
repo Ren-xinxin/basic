@@ -6,6 +6,9 @@ package cn.snowpic.year_2020.day_01_11;
 
 import org.junit.Test;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * generic test
  * @className GenericTest
@@ -70,5 +73,52 @@ public class GenericTest {
             }
         }
         return false;
+    }
+
+    /**
+     * test2
+     *
+     * @author lf
+     * @time 2020-01-11 23:20
+     */
+    @Test
+    public void test2() {
+        String[] inputs = {"9001 discuss.leetcode.com"};
+        Map<String, Integer> count = findSubDomainCount(inputs);
+        System.out.println("count = " + count);
+
+        String[] inputs2 = new String[]{"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"};
+
+        Map<String, Integer> count2 = findSubDomainCount(inputs2);
+        System.out.println("count2 = " + count2);
+    }
+
+    /**
+     * find sub domain count
+     *
+     * @author lf
+     * @time 2020-01-11 22:58
+     * @return @Map<Integer>
+     */
+    private Map<String, Integer> findSubDomainCount(String[] inputs) {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        for (String input : inputs) {
+            String[] split = input.split(" ");
+            String key = split[1];
+            int baseCount = Integer.parseInt(split[0]);
+            Integer oldCount = map.get(key);
+            map.put(key, oldCount == null ? baseCount : baseCount + oldCount);
+            int index = -1;
+            while (true) {
+                index = key.indexOf(".", index + 1);
+                if (index == -1) {
+                    break;
+                }
+                String nextDomain = key.substring(index + 1);
+                Integer count = map.get(nextDomain);
+                map.put(nextDomain, count == null ? baseCount : baseCount + count);
+            }
+        }
+        return map;
     }
 }
