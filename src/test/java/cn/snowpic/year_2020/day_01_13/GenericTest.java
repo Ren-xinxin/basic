@@ -46,4 +46,56 @@ public class GenericTest {
         }
         return result;
     }
+
+    /**
+     * test2
+     *
+     * @author lf
+     * @time 2020-01-13 21:00
+     */
+    @Test
+    public void test2() {
+        int[] seats = {1, 0, 0, 0, 1, 0, 1};
+        int maxNearby = maxNearby(seats);
+        System.out.println("maxNearby = " + maxNearby);
+
+        int[] seats2 = {1, 0, 0, 0};
+        int maxNearby1 = maxNearby(seats2);
+        System.out.println("maxNearby1 = " + maxNearby1);
+    }
+
+    /**
+     * max nearby
+     *
+     * @author lf
+     * @time 2020-01-13 21:02
+     * @param seats seats
+     * @return int
+     */
+    private int maxNearby(int[] seats) {
+        int max = 0;
+        boolean flag1 = seats[0] == 0;
+        boolean flag2 = seats[seats.length - 1] == 0;
+        int tep = 0;
+        for (int i = 0; i < seats.length; i++) {
+            if (i == seats.length - 1) {
+                if (flag2) {
+                    max = Math.max(max, tep + 1);
+                } else {
+                    max = Math.max(max, (tep + 1) / 2);
+                }
+            } else if (seats[i] == 0) {
+                tep++;
+            } else {
+                if (flag1) {
+                    flag1 = false;
+                    max = Math.max(max, tep + 1);
+                } else {
+                    max = Math.max(max, (tep + 1) / 2);
+                }
+                tep = 0;
+            }
+        }
+        return max;
+    }
 }
