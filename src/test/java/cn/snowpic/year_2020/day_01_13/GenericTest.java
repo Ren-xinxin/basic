@@ -56,11 +56,11 @@ public class GenericTest {
     @Test
     public void test2() {
         int[] seats = {1, 0, 0, 0, 1, 0, 1};
-        int maxNearby = maxNearby(seats);
+        int maxNearby = maxNeighbor(seats);
         System.out.println("maxNearby = " + maxNearby);
 
         int[] seats2 = {1, 0, 0, 0};
-        int maxNearby1 = maxNearby(seats2);
+        int maxNearby1 = maxNeighbor(seats2);
         System.out.println("maxNearby1 = " + maxNearby1);
     }
 
@@ -94,6 +94,31 @@ public class GenericTest {
                     max = Math.max(max, (tep + 1) / 2);
                 }
                 tep = 0;
+            }
+        }
+        return max;
+    }
+
+    private int maxNeighbor(int[] seats) {
+        int i = 0, j = seats.length - 1, max = 0, count = 0;
+        while (seats[i] == 0) {
+            i++;
+            count++;
+        }
+        max = Math.max(max, count);
+        count = 0;
+        while (seats[j] == 0) {
+            j--;
+            count++;
+        }
+        max = Math.max(max, count);
+        count = 0;
+        for (; i <= j; i++) {
+            if (seats[i] == 0) {
+                count++;
+            } else {
+                max = Math.max(max, (count + 1) / 2);
+                count = 0;
             }
         }
         return max;
