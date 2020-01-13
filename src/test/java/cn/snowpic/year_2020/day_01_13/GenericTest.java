@@ -99,6 +99,14 @@ public class GenericTest {
         return max;
     }
 
+    /**
+     * max neighbor
+     *
+     * @author lf
+     * @time 2020-01-13 22:24
+     * @param seats seats
+     * @return int
+     */
     private int maxNeighbor(int[] seats) {
         int i = 0, j = seats.length - 1, max = 0, count = 0;
         while (seats[i] == 0) {
