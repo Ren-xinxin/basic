@@ -6,9 +6,8 @@ package cn.snowpic.year_2020.day_01_18;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * generic test
@@ -98,5 +97,66 @@ public class GenericTest {
             }
         }
         return true;
+    }
+
+    /**
+     * test3
+     *
+     * @author lf
+     * @time 2020-01-18 20:53
+     */
+    @Test
+    public void test3() {
+        int[] array = {-1, 0, 1, 2, -1, -4};
+        Set<List<Integer>> numbers = zeroSumOfThreeNumbers(array);
+        System.out.println("numbers = " + numbers);
+    }
+
+    /**
+     * zero sum of three numbers
+     *
+     * @author lf
+     * @time 2020-01-18 20:54
+     * @param array array
+     * @return @Set<List<Integer>>
+     */
+    private Set<List<Integer>> zeroSumOfThreeNumbers(int[] array) {
+        Set<List<Integer>> result = new HashSet<>();
+        for (int i = 0; i < array.length - 2; i++) {
+            for (int j = i + 1; j < array.length - 1; j++) {
+                for (int k = j + 1; k < array.length; k++) {
+                    if (array[i] + array[j] + array[k] == 0) {
+                        ArrayList<Integer> origin = new ArrayList<>();
+                        origin.add(array[i]);
+                        origin.add(array[j]);
+                        origin.add(array[k]);
+                        List<Integer> sorted = origin.stream()
+                                .sorted()
+                                .collect(Collectors.toList());
+                        result.add(sorted);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * test4
+     *
+     * @author lf
+     * @time 2020-01-18 23:33
+     */
+    @Test
+    public void test4() {
+        List<Integer> list = new ArrayList<Integer>() {{
+            add(2);
+            add(8);
+            add(6);
+            add(5);
+        }};
+
+        List<Integer> collect = list.stream().sorted().collect(Collectors.toList());
+        System.out.println("collect = " + collect);
     }
 }
