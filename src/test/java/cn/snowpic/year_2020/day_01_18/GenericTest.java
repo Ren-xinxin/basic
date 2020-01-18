@@ -93,7 +93,7 @@ public class GenericTest {
             return false;
         }
         for (Integer value : counter.values()) {
-            if (!value.equals(min) && value % min != 0) {
+            if (value % min != 0) {
                 return false;
             }
         }
