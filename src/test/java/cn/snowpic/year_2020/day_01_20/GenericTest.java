@@ -9,6 +9,13 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * generic test
+ * @className GenericTest
+ *
+ * @author lf
+ * @time 2020-01-20 0:47
+ */
 public class GenericTest {
 
     /**
