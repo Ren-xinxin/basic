@@ -7,9 +7,17 @@ package cn.snowpic.year_2020.day_01_22;
 import cn.snowpic.util.CommonUtils;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
+/**
+ * generic test
+ * @className GenericTest
+ *
+ * @author lf
+ * @time 2020-01-22 0:24
+ */
 public class GenericTest {
 
     @Test
@@ -38,5 +46,36 @@ public class GenericTest {
             }
         });
         return result.get();
+    }
+
+    /**
+     * find four numbers sum
+     *
+     * @author lf
+     * @time 2020-01-22 0:23
+     * @param array array
+     * @param target target
+     * @return @Set<List<Integer>>
+     */
+    private Set<List<Integer>> findFourNumbersSum(int[] array, int target) {
+        Set<List<Integer>> result = new HashSet<>();
+        List<List<Integer>> permutes = CommonUtils.permute(array, 4);
+        permutes.forEach(permute -> {
+            List<Integer> element = permute.stream().sorted().collect(Collectors.toList());
+            int sum = element.stream().mapToInt(Integer::intValue).sum();
+            if (sum == target) {
+                result.add(element);
+            }
+        });
+        return result.stream()
+                .sorted(Comparator.comparingInt(e -> Math.abs(e.get(0))))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    @Test
+    public void test2() {
+        int[] array = {1, 0, -1, 0, -2, 2};
+        Set<List<Integer>> lists = findFourNumbersSum(array, 0);
+        System.out.println("lists = " + lists);
     }
 }
