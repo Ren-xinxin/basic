@@ -78,4 +78,46 @@ public class GenericTest {
         Set<List<Integer>> lists = findFourNumbersSum(array, 0);
         System.out.println("lists = " + lists);
     }
+
+    /**
+     * next larger permute
+     *
+     * @author lf
+     * @time 2020-01-22 21:30
+     * @param array array
+     * @return int[]
+     */
+    private int[] nextLargerPermute(int[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            if (array[i] > array[i - 1]) {
+                int tep = array[i];
+                array[i] = array[i - 1];
+                array[i - 1] = tep;
+                return array;
+            }
+        }
+        Arrays.sort(array);
+        return array;
+    }
+
+    /**
+     * test3
+     *
+     * @author lf
+     * @time 2020-01-22 21:32
+     */
+    @Test
+    public void test3() {
+        int[] array1 = {1, 2, 3};
+        int[] array2 = {3, 2, 1};
+        int[] array3 = {1, 1, 5};
+
+        int[] nextLargerPermute1 = nextLargerPermute(array1);
+        int[] nextLargerPermute2 = nextLargerPermute(array2);
+        int[] nextLargerPermute3 = nextLargerPermute(array3);
+
+        System.out.println("nextLargerPermute1 = " + Arrays.toString(nextLargerPermute1));
+        System.out.println("nextLargerPermute2 = " + Arrays.toString(nextLargerPermute2));
+        System.out.println("nextLargerPermute3 = " + Arrays.toString(nextLargerPermute3));
+    }
 }
