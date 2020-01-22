@@ -120,4 +120,25 @@ public class GenericTest {
         System.out.println("nextLargerPermute2 = " + Arrays.toString(nextLargerPermute2));
         System.out.println("nextLargerPermute3 = " + Arrays.toString(nextLargerPermute3));
     }
+
+    /**
+     * find index
+     *
+     * @author lf
+     * @time 2020-01-22 21:47
+     * @param array array
+     * @param target target
+     * @return int
+     */
+    private int findIndex(int[] array, int target) {
+        //Arrays.sort(array);
+        return Arrays.binarySearch(array, target);
+    }
+
+    @Test
+    public void test4() {
+        int[] array = {4, 5, 6, 7, 0, 1, 2};
+        int index = findIndex(array, 0);
+        System.out.println("index = " + index);
+    }
 }
