@@ -59,6 +59,9 @@ public class GenericTest {
         int[] array = {2, 3, 6, 7};
         List<List<Integer>> sum = findSum(array, 7);
         System.out.println("sum = " + sum);
+
+        List<List<Integer>> sum2 = findSum2(array, 7);
+        System.out.println("sum2 = " + sum2);
     }
 
     /**
@@ -86,6 +89,66 @@ public class GenericTest {
                 }
             });
         }
+        return result;
+    }
+
+    /**
+     * find sum permute
+     *
+     * @author lf
+     * @time 2020-01-28 1:35
+     * @param target target
+     * @param array array
+     * @param index index
+     * @param tepContainer tep container
+     * @param result result
+     */
+    private void findSumPermute(final int target, List<Integer> array, int index, List<Integer> tepContainer, List<List<Integer>> result) {
+        Integer currentElement = array.get(index);
+        int currentSum = tepContainer.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        int len = (target - currentSum) / currentElement;
+        try {
+            for (int i = 0; i < len; i++) {
+                int newSum = currentSum + currentElement * (i + 1);
+                tepContainer.add(currentElement);
+                // whether the sum greater than target
+                if (newSum >= target) {
+                    if (newSum == target) {
+                        result.add(tepContainer);
+                    }
+                    return;
+                }
+                // find next index's chance
+                for (int j = index + 1; j < array.size(); j++) {
+                    findSumPermute(target, array, i, tepContainer, result);
+                }
+            }
+        } finally {
+            // remove current element
+            while (tepContainer.contains(currentElement)) {
+                tepContainer.remove(currentElement);
+            }
+        }
+    }
+
+    private List<List<Integer>> findSum2(int[] array, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> collect = Arrays.stream(array)
+                .distinct()
+                .boxed()
+                .collect(Collectors.toList());
+        List<List<Integer>> tep = new ArrayList<>();
+        for (int i = 0; i < array.length; i++) {
+            List<List<Integer>> permutes = CommonUtils.permute(array, i + 1);
+            tep.addAll(permutes.stream()
+                    .filter(permute -> permute.stream()
+                            .mapToInt(Integer::intValue)
+                            .sum() <= target)
+                    .collect(Collectors.toList()));
+        }
+        findSumPermute(target, collect, 0, new ArrayList<>(), result);
         return result;
     }
 }
