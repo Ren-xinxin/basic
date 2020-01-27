@@ -57,7 +57,9 @@ public class CommonUtils {
      */
     public static List<List<Integer>> permute(int[] origin, int step) {
         List<List<Integer>> result = new ArrayList<>();
-        List<Integer> collected = Arrays.stream(origin).boxed().collect(Collectors.toList());
+        List<Integer> collected = Arrays.stream(origin)
+                .boxed()
+                .collect(Collectors.toList());
         permute(collected, step, new ArrayList<>(), new HashSet<>(), result);
         return result;
     }
