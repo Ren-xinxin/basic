@@ -132,7 +132,12 @@ public class GenericTest {
      */
     private int findIndex(int[] array, int target) {
         //Arrays.sort(array);
-        return Arrays.binarySearch(array, target);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == target) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Test
