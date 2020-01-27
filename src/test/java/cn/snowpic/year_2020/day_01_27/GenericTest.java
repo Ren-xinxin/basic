@@ -75,9 +75,13 @@ public class GenericTest {
         for (int i = 0; i < array.length; i++) {
             List<List<Integer>> permutes = CommonUtils.permute(array, i + 1);
             permutes.forEach(permute -> {
-                int sum = permute.stream().mapToInt(Integer::intValue).sum();
+                int sum = permute.stream()
+                        .mapToInt(Integer::intValue)
+                        .sum();
                 if (target == sum) {
-                    List<Integer> list = permute.stream().sorted().collect(Collectors.toList());
+                    List<Integer> list = permute.stream()
+                            .sorted()
+                            .collect(Collectors.toList());
                     result.add(list);
                 }
             });
