@@ -72,8 +72,8 @@ public class GenericTest {
      */
     private List<List<Integer>> findSum(int[] array, int target) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            List<List<Integer>> permutes = CommonUtils.permute(array, i + 1);
+        for (int step = 1; step < array.length + 1; step++) {
+            List<List<Integer>> permutes = CommonUtils.permute(array, step);
             permutes.forEach(permute -> {
                 int sum = permute.stream()
                         .mapToInt(Integer::intValue)
