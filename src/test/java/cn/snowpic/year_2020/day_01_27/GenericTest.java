@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GenericTest {
@@ -76,7 +77,7 @@ public class GenericTest {
     private List<List<Integer>> findSum(int[] array, int target) {
         List<List<Integer>> result = new ArrayList<>();
         for (int step = 1; step < array.length + 1; step++) {
-            List<List<Integer>> permutes = CommonUtils.permute(array, step);
+            Set<List<Integer>> permutes = CommonUtils.permute(array, step);
             permutes.forEach(permute -> {
                 int sum = permute.stream()
                         .mapToInt(Integer::intValue)
@@ -141,7 +142,7 @@ public class GenericTest {
                 .collect(Collectors.toList());
         List<List<Integer>> tep = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
-            List<List<Integer>> permutes = CommonUtils.permute(array, i + 1);
+            Set<List<Integer>> permutes = CommonUtils.permute(array, i + 1);
             tep.addAll(permutes.stream()
                     .filter(permute -> permute.stream()
                             .mapToInt(Integer::intValue)

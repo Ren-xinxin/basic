@@ -19,12 +19,18 @@ public class CommonUtils {
      * @param tepContainer tep container
      * @param book book
      * @param result result
+     * @param sorted sorted
      */
-    private static void permute(final List<Integer> origin, int step, List<Integer> tepContainer, Set<Integer> book, List<List<Integer>> result) {
+    private static void permute(final List<Integer> origin, int step, List<Integer> tepContainer, Set<Integer> book, Set<List<Integer>> result, boolean... sorted) {
         // whether there a compete number permute
         if (tepContainer.size() == step) {
             // put current permute into the result
-            result.add(new ArrayList<>(tepContainer));
+            // whether the elements need sort
+            List<Integer> elements = new ArrayList<>(tepContainer);
+            if (sorted != null && sorted.length == 1 && sorted[0]) {
+                elements.sort(Integer::compareTo);
+            }
+            result.add(elements);
             // return last node to find another chance
             return;
         }
@@ -53,10 +59,10 @@ public class CommonUtils {
      * @time 2020-01-20 20:49
      * @param origin origin
      * @param step step
-     * @return @List<List<Integer>>
+     * @return @Set<List<Integer>>
      */
-    public static List<List<Integer>> permute(int[] origin, int step) {
-        List<List<Integer>> result = new ArrayList<>();
+    public static Set<List<Integer>> permute(int[] origin, int step) {
+        Set<List<Integer>> result = new HashSet<>();
         List<Integer> collected = Arrays.stream(origin)
                 .boxed()
                 .collect(Collectors.toList());

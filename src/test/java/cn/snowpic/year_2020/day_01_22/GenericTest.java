@@ -38,7 +38,7 @@ public class GenericTest {
      */
     private int findClosestThreeNums(int[] array, int target) {
         AtomicInteger result = new AtomicInteger(Integer.MAX_VALUE);
-        List<List<Integer>> permutes = CommonUtils.permute(array, 3);
+        Set<List<Integer>> permutes = CommonUtils.permute(array, 3);
         permutes.forEach(permute -> {
             int sum = permute.stream().mapToInt(Integer::intValue).sum();
             if ((Math.abs(sum - target) < Math.abs(target - result.get()))) {
@@ -59,7 +59,7 @@ public class GenericTest {
      */
     private Set<List<Integer>> findFourNumbersSum(int[] array, int target) {
         Set<List<Integer>> result = new HashSet<>();
-        List<List<Integer>> permutes = CommonUtils.permute(array, 4);
+        Set<List<Integer>> permutes = CommonUtils.permute(array, 4);
         permutes.forEach(permute -> {
             List<Integer> element = permute.stream().sorted().collect(Collectors.toList());
             int sum = element.stream().mapToInt(Integer::intValue).sum();
