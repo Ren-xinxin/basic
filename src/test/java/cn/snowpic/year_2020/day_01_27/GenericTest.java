@@ -7,10 +7,7 @@ package cn.snowpic.year_2020.day_01_27;
 import cn.snowpic.util.CommonUtils;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GenericTest {
@@ -61,7 +58,7 @@ public class GenericTest {
         List<List<Integer>> sum = findSum(array, 7);
         System.out.println("sum = " + sum);
 
-        List<List<Integer>> sum2 = findSum2(array, 7);
+        Set<List<Integer>> sum2 = findSum2(array, 7);
         System.out.println("sum2 = " + sum2);
     }
 
@@ -94,62 +91,48 @@ public class GenericTest {
     }
 
     /**
-     * find sum permute
+     * find sum2
      *
      * @author lf
-     * @time 2020-01-28 1:35
-     * @param target target
+     * @time 2020-01-28 23:28
      * @param array array
-     * @param index index
-     * @param tepContainer tep container
-     * @param result result
+     * @param target target
+     * @return @Set<List<Integer>>
      */
-    private void findSumPermute(final int target, List<Integer> array, int index, List<Integer> tepContainer, List<List<Integer>> result) {
-        Integer currentElement = array.get(index);
-        int currentSum = tepContainer.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-        int len = (target - currentSum) / currentElement;
-        try {
-            for (int i = 0; i < len; i++) {
-                int newSum = currentSum + currentElement * (i + 1);
-                tepContainer.add(currentElement);
-                // whether the sum greater than target
-                if (newSum >= target) {
-                    if (newSum == target) {
-                        result.add(tepContainer);
-                    }
-                    return;
-                }
-                // find next index's chance
-                for (int j = index + 1; j < array.size(); j++) {
-                    findSumPermute(target, array, i, tepContainer, result);
-                }
-            }
-        } finally {
-            // remove current element
-            while (tepContainer.contains(currentElement)) {
-                tepContainer.remove(currentElement);
-            }
-        }
+    private Set<List<Integer>> findSum2(int[] array, int target) {
+        Set<List<Integer>> result = new HashSet<>();
+        array = Arrays.stream(array).sorted().distinct().toArray();
+        backTracking(array, target, 0, new ArrayList<>(), result);
+        return result;
     }
 
-    private List<List<Integer>> findSum2(int[] array, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        List<Integer> collect = Arrays.stream(array)
-                .distinct()
-                .boxed()
-                .collect(Collectors.toList());
-        List<List<Integer>> tep = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            Set<List<Integer>> permutes = CommonUtils.permute(array, i + 1);
-            tep.addAll(permutes.stream()
-                    .filter(permute -> permute.stream()
-                            .mapToInt(Integer::intValue)
-                            .sum() <= target)
+    /**
+     * back tracking
+     *
+     * @author lf
+     * @time 2020-01-28 23:25
+     * @param candidates candidates
+     * @param target target
+     * @param start start
+     * @param curr curr
+     * @param result result
+     */
+    private void backTracking(int[] candidates, final int target, int start, List<Integer> curr, Set<List<Integer>> result) {
+        if (target > 0) {
+            for (int i = start; i < candidates.length; i++) {
+                // pruning
+                if (candidates[i] > target) {
+                    continue;
+                }
+                curr.add(candidates[i]);
+                backTracking(candidates, target - candidates[i], start, curr, result);
+                // remove the last element for another chance
+                curr.remove(curr.size() - 1);
+            }
+        } else if (target == 0) {
+            result.add(new ArrayList<>(curr).stream()
+                    .sorted()
                     .collect(Collectors.toList()));
         }
-        findSumPermute(target, collect, 0, new ArrayList<>(), result);
-        return result;
     }
 }
