@@ -69,4 +69,25 @@ public class CommonUtils {
         permute(collected, step, new ArrayList<>(), new HashSet<>(), result);
         return result;
     }
+
+    /**
+     * permute
+     *
+     * @author lf
+     * @time 2020-01-28 22:50
+     * @param origin origin
+     * @param step step
+     * @param sorted sorted
+     * @return @Set<List<Integer>>
+     */
+    public static Set<List<Integer>> permute(int[] origin, int step, boolean sorted) {
+        Set<List<Integer>> result = new HashSet<>();
+        List<Integer> collected = Arrays.stream(origin)
+                .sorted()
+                .distinct()
+                .boxed()
+                .collect(Collectors.toList());
+        permute(collected, step, new ArrayList<>(), new HashSet<>(), result, sorted);
+        return result;
+    }
 }
