@@ -52,7 +52,7 @@ public class GenericTest {
      */
     private List<List<Integer>> combinationSum(int[] array, int target) {
         Set<List<Integer>> result = new HashSet<>();
-        array = Arrays.stream(array).sorted().toArray();
+        Arrays.sort(array);
         backTracking(array, target, 0, new ArrayList<>(), result);
         return result.stream()
                 .sorted(Comparator.comparing(Object::toString))
