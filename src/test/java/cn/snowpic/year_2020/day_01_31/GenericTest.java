@@ -52,6 +52,6 @@ public class GenericTest {
                 result += map.get(rome.charAt(i));
             }
         }
-        return result == 0 ? -1 : result;
+        return (result == 0) ? -1 : result;
     }
 }
