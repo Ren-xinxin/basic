@@ -46,4 +46,31 @@ public class GenericTest {
         }
         return true;
     }
+
+    /**
+     * binary value
+     *
+     * @author lf
+     * @time 2020-02-05 22:23:43
+     * @param binary binary
+     * @return int
+     */
+    private int binaryValue(String binary) {
+        int sum = 0;
+        char[] chars = binary.toCharArray();
+        int len = chars.length;
+        for (int i = 0; i < len; i++) {
+            if (chars[len - 1 - i] == '1') {
+                sum += Math.pow(2, i);
+            }
+        }
+        return sum;
+    }
+
+    @Test
+    public void test2() {
+        String input = "111";
+        int value = binaryValue(input);
+        System.out.println("value = " + value);
+    }
 }
