@@ -6,9 +6,7 @@ package cn.snowpic.year_2020.day_02_07;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GenericTest {
@@ -93,5 +91,36 @@ public class GenericTest {
 
         String reverseVowel = reverseVowel(input);
         System.out.println("reverseVowel = " + reverseVowel);
+    }
+
+    /**
+     * first not duplicated character index
+     *
+     * @author lf
+     * @time 2020-02-07 20:46:17
+     * @param input input
+     * @return int
+     */
+    private int firstNotDuplicatedCharacterIndex(String input) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < input.length(); i++) {
+            char key = input.charAt(i);
+            Integer count = map.get(key);
+            map.put(key, count == null ? 1 : count++);
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            char key = input.charAt(i);
+            if (map.get(key) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Test
+    public void test3() {
+        int index = firstNotDuplicatedCharacterIndex("leetcode");
+        System.out.println("index = " + index);
     }
 }
