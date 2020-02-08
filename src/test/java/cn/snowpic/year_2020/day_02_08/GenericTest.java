@@ -45,4 +45,45 @@ public class GenericTest {
         String compressed = compress(inputs);
         System.out.println("compressed = " + compressed);
     }
+
+    /**
+     * repeated sub
+     *
+     * @author lf
+     * @time 2020-02-08 19:50:45
+     * @param input input
+     * @return boolean
+     */
+    private boolean repeatedSub(String input) {
+        rxx:
+        for (int i = 0; i < input.length() / 2; i++) {
+            if (input.length() % (i + 1) == 0) {
+                int start = i + 1;
+                String pattern = input.substring(0, start);
+                int end = start * 2;
+                while (end <= input.length()) {
+                    String sub = input.substring(start, end);
+                    if (!pattern.equals(sub)) {
+                        continue rxx;
+                    }
+                    start = end;
+                    end = start + (i + 1);
+                }
+                System.out.println("repeated sub = " + pattern);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void test2() {
+        String input = "abab";
+        boolean repeatedSub = repeatedSub(input);
+        System.out.println("repeatedSub = " + repeatedSub);
+        String input1 = "abcabcabcabc";
+
+        boolean repeatedSub1 = repeatedSub(input1);
+        System.out.println("repeatedSub1 = " + repeatedSub1);
+    }
 }
