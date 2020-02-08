@@ -120,4 +120,27 @@ public class GenericTest {
         boolean capitalLetters = isCorrectCapitalLetters(input);
         System.out.println("capitalLetters = " + capitalLetters);
     }
+
+    /**
+     * max specific sub sequence
+     *
+     * @author lf
+     * @time 2020-02-08 20:43:03
+     * @param str1 str1
+     * @param str2 str2
+     * @return int
+     */
+    private int maxSpecificSubSequence(String str1, String str2) {
+        if (str1.equals(str2)) {
+            return -1;
+        }
+        return Math.max(str1.length(), str2.length());
+    }
+
+    @Test
+    public void test4() {
+        String str1 = "aba", str2 = "cdcf";
+        int len = maxSpecificSubSequence(str1, str2);
+        System.out.println("len = " + len);
+    }
 }
