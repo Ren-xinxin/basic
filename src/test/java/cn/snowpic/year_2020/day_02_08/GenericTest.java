@@ -86,4 +86,38 @@ public class GenericTest {
         boolean repeatedSub1 = repeatedSub(input1);
         System.out.println("repeatedSub1 = " + repeatedSub1);
     }
+
+    /**
+     * is correct capital letters
+     *
+     * @author lf
+     * @time 2020-02-08 20:15:21
+     * @param input input
+     * @return boolean
+     */
+    private boolean isCorrectCapitalLetters(String input) {
+        boolean isAllCapital = Character.isUpperCase(input.charAt(input.length() - 1));
+        for (int i = input.length() - 2; i >= 0; i--) {
+            if (isAllCapital) {
+                if (Character.isLowerCase(input.charAt(i))) {
+                    return false;
+                }
+            } else {
+                if (i == 0) {
+                    // input's char at 0 can be lower case or upper case
+                    return true;
+                } else if (Character.isUpperCase(input.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void test3() {
+        String input = "Flag";
+        boolean capitalLetters = isCorrectCapitalLetters(input);
+        System.out.println("capitalLetters = " + capitalLetters);
+    }
 }
