@@ -97,16 +97,14 @@ public class GenericTest {
      */
     private boolean isCorrectCapitalLetters(String input) {
         boolean isAllCapital = Character.isUpperCase(input.charAt(input.length() - 1));
-        for (int i = input.length() - 2; i >= 0; i--) {
+        for (int i = 0; i < input.length() - 1; i++) {
             if (isAllCapital) {
                 if (Character.isLowerCase(input.charAt(i))) {
                     return false;
                 }
             } else {
-                if (i == 0) {
-                    // input's char at 0 can be lower case or upper case
-                    return true;
-                } else if (Character.isUpperCase(input.charAt(i))) {
+                // input's char at 0 can be lower case or upper case
+                if (i > 0 && Character.isUpperCase(input.charAt(i))) {
                     return false;
                 }
             }
