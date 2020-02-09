@@ -42,4 +42,51 @@ public class GenericTest {
         String reversed = reverseHalfCount(str, 2);
         System.out.println("reversed = " + reversed);
     }
+
+    /**
+     * can be reword
+     *
+     * @author lf
+     * @time 2020-02-09 19:36:12
+     * @param present present
+     * @return boolean
+     */
+    private boolean canBeReworded(String present) {
+        boolean haveAbsent = false;
+        int continuousLateCount = 0;
+        for (int i = 0; i < present.length(); i++) {
+            char current = present.charAt(i);
+            switch (current) {
+                case 'A': {
+                    if (haveAbsent) {
+                        return false;
+                    }
+                    haveAbsent = true;
+                    break;
+                }
+                case 'L': {
+                    continuousLateCount++;
+                    if (continuousLateCount >= 3) {
+                        return false;
+                    }
+                    break;
+                }
+                default: {
+                    continuousLateCount = 0;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void test2() {
+        String present = "PPALLP";
+        boolean reworded = canBeReworded(present);
+        System.out.println("reworded = " + reworded);
+
+        String present1 = "PPALLL";
+        boolean reworded1 = canBeReworded(present1);
+        System.out.println("reworded1 = " + reworded1);
+    }
 }
