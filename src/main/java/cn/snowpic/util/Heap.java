@@ -149,4 +149,22 @@ public class Heap {
         siftDown(0);
         return result;
     }
+
+    /**
+     * main
+     *
+     * @author lf
+     * @time 2020-02-10 16:43:21
+     * @param args args
+     */
+    public static void main(String[] args) {
+        int[] array = {1, 4, 5, 6, 7, 8, 98, 3, 23};
+        Heap heap = new Heap(array, false);
+        heap.creat();
+        System.out.println(heap.toString());
+        int curr;
+        while ((curr = heap.poll()) != -1) {
+            System.out.print(curr + " ");
+        }
+    }
 }
