@@ -62,4 +62,60 @@ public class GenericTest {
         boolean back1 = back("LL");
         System.out.println("back1 = " + back1);
     }
+
+    /**
+     * palindrome
+     *
+     * @author lf
+     * @time 2020-02-11 11:38:33
+     * @param input input
+     * @return boolean
+     */
+    private boolean palindrome(String input, int left, int right, boolean isFirstFailed) {
+        while (left < right) {
+            if (input.charAt(left) == input.charAt(right)) {
+                left++;
+                right--;
+            } else {
+                if (!isFirstFailed) {
+                    return false;
+                }
+                boolean palindrome1 = palindrome(input, left + 1, right, false);
+                boolean palindrome2 = palindrome(input, left, right - 1, false);
+                if (palindrome1) {
+                    System.out.println("remove left " + input.charAt(left));
+                    return true;
+                }
+                if (palindrome2) {
+                    System.out.println("remove right " + input.charAt(right));
+                    return true;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * palindrome
+     *
+     * @author lf
+     * @time 2020-02-11 21:47:42
+     * @param input input
+     * @return boolean
+     */
+    private boolean palindrome(String input) {
+        return palindrome(input, 0, input.length() - 1, true);
+    }
+
+    @Test
+    public void test2() {
+        String input = "aba";
+        boolean palindrome1 = palindrome(input);
+        System.out.println("palindrome1 = " + palindrome1);
+
+        boolean palindrome = palindrome("abcbda");
+        System.out.println("palindrome = " + palindrome);
+    }
 }
