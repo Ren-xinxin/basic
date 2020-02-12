@@ -6,6 +6,8 @@ package cn.snowpic.year_2020.day_02_12;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GenericTest {
@@ -112,5 +114,36 @@ public class GenericTest {
         String input = "LOVELY";
         String lowerCase = toLowerCase(input);
         System.out.println("lowerCase = " + lowerCase);
+    }
+
+    /**
+     * count morse code
+     *
+     * @author lf
+     * @time 2020-02-12 23:31:39
+     * @param input input
+     * @return int
+     */
+    private int countMorseCode(String[] inputs) {
+        String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+                "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-",
+                ".--", "-..-", "-.--", "--.."};
+        Set<String> set = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+        for (String input : inputs) {
+            sb.setLength(0);
+            for (char c : input.toCharArray()) {
+                sb.append(morseCode[c - 'a']);
+            }
+            set.add(sb.toString());
+        }
+        return set.size();
+    }
+
+    @Test
+    public void test4() {
+        String[] inputs = {"gin", "zen", "gig", "msg"};
+        int count = countMorseCode(inputs);
+        System.out.println("count = " + count);
     }
 }
