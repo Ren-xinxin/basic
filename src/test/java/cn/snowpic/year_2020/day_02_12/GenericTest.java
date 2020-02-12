@@ -88,4 +88,29 @@ public class GenericTest {
         int count = countBinary(input);
         System.out.println("count = " + count);
     }
+
+    /**
+     * to lower case
+     *
+     * @author lf
+     * @time 2020-02-12 23:18:55
+     * @param input input
+     * @return String
+     */
+    private String toLowerCase(String input) {
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= 'A' && chars[i] <= 'Z') {
+                chars[i] = (char) (chars[i] + 32);
+            }
+        }
+        return new String(chars);
+    }
+
+    @Test
+    public void test3() {
+        String input = "LOVELY";
+        String lowerCase = toLowerCase(input);
+        System.out.println("lowerCase = " + lowerCase);
+    }
 }
