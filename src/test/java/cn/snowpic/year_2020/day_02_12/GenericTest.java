@@ -121,7 +121,7 @@ public class GenericTest {
      *
      * @author lf
      * @time 2020-02-12 23:31:39
-     * @param input input
+     * @param inputs inputs
      * @return int
      */
     private int countMorseCode(String[] inputs) {
