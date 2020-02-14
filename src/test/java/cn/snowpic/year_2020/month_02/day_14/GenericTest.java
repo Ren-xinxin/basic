@@ -63,4 +63,35 @@ public class GenericTest {
         boolean translated1 = translateWith2ExchangedChars("ab", "ab");
         System.out.println("translated1 = " + translated1);
     }
+
+    /**
+     * max sub length
+     *
+     * @author lf
+     * @time 2020-02-14 20:57:05
+     * @param input input
+     * @return int
+     */
+    private int maxSubLength(String input) {
+        int max = 0;
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i; j < input.length() - 1; j++) {
+                String after = input.substring(i, j + 1);
+                if (after.contains(String.valueOf(input.charAt(j + 1)))) {
+                    max = Math.max(max, (j + 1) - i);
+                    break;
+                }
+            }
+        }
+        return max;
+    }
+
+    @Test
+    public void test2() {
+        String input = "abcabcbb";
+        int length = maxSubLength(input);
+        System.out.println("length = " + length);
+
+        System.out.println(maxSubLength("bbbbbbbbbbbbb"));
+    }
 }
