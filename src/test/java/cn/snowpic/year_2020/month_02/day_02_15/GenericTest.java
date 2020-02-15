@@ -4,7 +4,11 @@
 
 package cn.snowpic.year_2020.month_02.day_02_15;
 
+import org.apache.commons.lang.text.StrBuilder;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * generic test
@@ -107,5 +111,41 @@ public class GenericTest {
             }
         }
         return result;
+    }
+
+    /**
+     * convert
+     *
+     * @author lf
+     * @time 2020-02-15 17:52:31
+     * @param input input
+     * @param rowNumber row number
+     * @return String
+     */
+    private String convert(String input, int rowNumber) {
+        List<StringBuilder> sbs = new ArrayList<>();
+        for (int i = 0; i < Math.min(input.length(), rowNumber); i++) {
+            sbs.add(new StringBuilder());
+        }
+        boolean down = false;
+        int currRow = 0;
+        for (char c : input.toCharArray()) {
+            if (currRow == 0 || currRow == sbs.size() - 1) {
+                down = !down;
+            }
+            sbs.get(currRow).append(c);
+            currRow += down ? 1 : -1;
+        }
+        StrBuilder ret = new StrBuilder();
+        sbs.forEach(ret::append);
+        return ret.toString();
+    }
+
+    @Test
+    public void test2() {
+        String input = "PAYPALISHIRING";
+
+        String convert = convert(input, 3);
+        System.out.println("convert = " + convert);
     }
 }
