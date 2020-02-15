@@ -59,7 +59,53 @@ public class GenericTest {
 
     @Test
     public void test1() {
-        int subPalindrome = maxSubPalindrome("babad");
+        String input = "babad";
+        int subPalindrome = maxSubPalindrome(input);
         System.out.println("subPalindrome = " + subPalindrome);
+
+        String palindrome = subPalindrome(input);
+        System.out.println("palindrome = " + palindrome);
+    }
+
+    /**
+     * expand around center
+     *
+     * @author lf
+     * @time 2020-02-15 16:15:16
+     * @param origin origin
+     * @param left left
+     * @param right right
+     * @return int
+     */
+    private int expandAroundCenter(String origin, int left, int right) {
+        while (left >= 0 && right < origin.length() && origin.charAt(left) == origin.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+
+    /**
+     * sub palindrome
+     *
+     * @author lf
+     * @time 2020-02-15 16:35:23
+     * @param input input
+     * @return String
+     */
+    private String subPalindrome(String input) {
+        String result = "";
+        int start = 0, end = 0;
+        for (int i = 0; i < input.length(); i++) {
+            int len1 = expandAroundCenter(input, i, i);
+            int len2 = expandAroundCenter(input, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = start + len;
+                result = input.substring(start, end);
+            }
+        }
+        return result;
     }
 }
