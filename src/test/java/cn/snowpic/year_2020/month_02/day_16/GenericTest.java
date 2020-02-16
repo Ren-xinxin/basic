@@ -7,6 +7,11 @@ package cn.snowpic.year_2020.month_02.day_16;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class GenericTest {
 
     /**
@@ -42,4 +47,60 @@ public class GenericTest {
         String input = "-4193 with words";
         System.out.println(parseInt(input));
     }
+
+    /**
+     * combine
+     *
+     * @author lf
+     * @time 2020-02-16 20:15:07
+     * @param origin origin
+     * @param index index
+     * @param prefix prefix
+     * @param maps maps
+     * @param result result
+     */
+    private void combine(String origin, int index, String prefix, Map<Character, String> maps, List<String> result) {
+        char charAt = origin.charAt(index);
+        String current = maps.get(charAt);
+        for (int i = 0; i < current.length(); i++) {
+            if (index == origin.length() - 1) {
+                result.add(prefix + current.charAt(i));
+            } else {
+                combine(origin, index + 1, prefix + current.charAt(i), maps, result);
+            }
+        }
+    }
+
+    /**
+     * combine
+     *
+     * @author lf
+     * @time 2020-02-16 20:15:16
+     * @param input input
+     * @return @List<String>
+     */
+    private List<String> combine(String input) {
+        Map<Character, String> maps = new HashMap<Character, String>() {
+            {
+                put('2', "abc");
+                put('3', "def");
+                put('4', "ghi");
+                put('5', "jkl");
+                put('6', "mno");
+                put('7', "pqrs");
+                put('8', "tvu");
+                put('9', "wxyz");
+            }
+        };
+        List<String> result = new ArrayList<>();
+        combine(input, 0, "", maps, result);
+        return result;
+    }
+
+    @Test
+    public void test3() {
+        List<String> combine = combine("23");
+        System.out.println("combine = " + combine);
+    }
+
 }
