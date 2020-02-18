@@ -68,7 +68,7 @@ public class CommonUtils {
 
 
     /**
-     * convert
+     * convert utility
      *
      * @author lf
      * @time 2020-02-18 23:06:56
