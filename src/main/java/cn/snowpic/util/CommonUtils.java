@@ -65,4 +65,21 @@ public class CommonUtils {
         permute(collected, step, new ArrayList<>(), new HashSet<>(), result);
         return result;
     }
+
+
+    /**
+     * convert
+     *
+     * @author lf
+     * @time 2020-02-18 23:06:56
+     * @param input input
+     * @return @Set<Character>
+     */
+    public static Set<Character> convert(String input) {
+        Set<Character> result = new HashSet<>();
+        for (char c : input.toCharArray()) {
+            result.add(c);
+        }
+        return result;
+    }
 }
