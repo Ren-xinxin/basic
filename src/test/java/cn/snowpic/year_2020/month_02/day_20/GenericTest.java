@@ -49,30 +49,29 @@ public class GenericTest {
      * @param result result
      */
     private void decrypt(int[] array, int index, int step, String str, List<String> result) {
-        if (index == array.length) {
+        int addedIndex = index + step;
+        if (addedIndex > array.length) {
+            return;
+        }
+        int tep = step == 1 ? array[index] : Integer.parseInt(array[index] + "" + array[index + 1]);
+        if (tep > 26) {
+            return;
+        }
+        str += (char) (tep + 'A' - 1);
+        // whether current index is the last
+        if (addedIndex == array.length) {
             result.add(str);
             return;
         }
-        if (index > array.length) {
-            return;
-        }
-        if (step == 1) {
-            str += (char) (array[index] + 'A' - 1);
-            decrypt(array, index + 1, 1, str, result);
-            decrypt(array, index + 1, 2, str, result);
-        } else {
-            int tep = Integer.parseInt(array[index] + "" + array[index + 1]);
-            if (tep <= 26) {
-                str += (char) (tep + 'A' - 1);
-                decrypt(array, index + 2, 1, str, result);
-                decrypt(array, index + 2, 2, str, result);
-            }
-        }
+        decrypt(array, addedIndex, 1, str, result);
+        decrypt(array, addedIndex, 2, str, result);
     }
 
     @Test
     public void test1() {
         List<String> decrypted = decrypt("12");
         System.out.println(decrypted);
+
+        System.out.println(decrypt("226"));
     }
 }
