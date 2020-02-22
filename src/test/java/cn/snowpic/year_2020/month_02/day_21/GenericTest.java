@@ -114,7 +114,7 @@ public class GenericTest {
                     tep = result[currentIndex - k] / 10;
                     if (tep < 1) break;
                     result[currentIndex - k] %= 10;
-                    result[(currentIndex) - k - 1] += tep % 10;
+                    result[(currentIndex) - k - 1] += tep;
                 }
             }
         }
