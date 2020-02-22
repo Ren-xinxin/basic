@@ -103,7 +103,7 @@ public class GenericTest {
         // initial a result int array
         int[] result = new int[(len1 + 1) * (len2 + 1) - 1];
         // calculate offset between current multiply result and the int array
-        int offset = (result.length - 1) - (len1 - 1) - (len2 - 1);
+        int offset = (result.length - 1) - ((len1 - 1) - (len2 - 1));
         for (int i = len1 - 1; i >= 0; i--) {
             for (int j = len2 - 1; j >= 0; j--) {
                 int tep = Integer.parseInt(input1.charAt(i) + "") * Integer.parseInt(input2.charAt(j) + "");
