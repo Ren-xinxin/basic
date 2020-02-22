@@ -81,4 +81,68 @@ public class GenericTest {
 
         System.out.println(spit2Ip("2322133"));
     }
+
+    /**
+     * multiply
+     *
+     * @author lf
+     * @time 2020-02-22 18:43:19
+     * @param input1 input1
+     * @param input2 input2
+     * @return String
+     */
+    private String multiply(String input1, String input2) {
+        if (input1.matches("^//d+$") && input2.matches("^//d+$")) {
+            throw new IllegalArgumentException("You must entry a pair of numbers");
+        }
+        input1 = trim(input1);
+        input2 = trim(input2);
+        // input's length
+        int len1 = input1.length();
+        int len2 = input2.length();
+        // initial a result int array
+        int[] result = new int[(len1 + 1) * (len2 + 1) - 1];
+        // calculate offset between current multiply result and the int array
+        int offset = (result.length - 1) - (len1 - 1) - (len2 - 1);
+        for (int i = len1 - 1; i >= 0; i--) {
+            for (int j = len2 - 1; j >= 0; j--) {
+                int tep = Integer.parseInt(input1.charAt(i) + "") * Integer.parseInt(input2.charAt(j) + "");
+                int currentIndex = i + j + offset;
+                result[currentIndex] += tep;
+                // deal with the last three numbers within it.
+                for (int k = 0; k < 2; k++) {
+                    tep = result[currentIndex - k] / 10;
+                    if (tep < 1) break;
+                    result[currentIndex - k] %= 10;
+                    result[(currentIndex) - k - 1] += tep % 10;
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int value : result) {
+            sb.append(value);
+        }
+        return trim(sb.toString());
+    }
+
+    /**
+     * trim
+     *
+     * @author lf
+     * @time 2020-02-22 18:39:09
+     * @param input input
+     * @return String
+     */
+    private String trim(String input) {
+        while (input.length() != 0 && input.charAt(0) == '0') {
+            input = input.substring(1);
+        }
+        return input.length() == 0 ? "0" : input;
+    }
+
+    @Test
+    public void test2() {
+        String multiplied = multiply("60003", "0");
+        System.out.println("multiplied = " + multiplied);
+    }
 }
