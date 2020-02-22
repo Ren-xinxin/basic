@@ -65,6 +65,9 @@ public class GenericTest {
         if (input.length() > 3 * 4) {
             throw new IllegalArgumentException("Ip string's length must less than 3 * 4!");
         }
+        if (input.matches("^//d+$")) {
+            throw new NumberFormatException("Ip string's format is incorrect.");
+        }
         List<String> result = new ArrayList<>();
         spilt2Ip(input, 0, 0, "", result);
         return result;
