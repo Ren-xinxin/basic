@@ -6,6 +6,9 @@ package cn.snowpic.year_2020.month_02.day_23;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * generic test
  *
@@ -70,5 +73,154 @@ public class GenericTest {
     public void test2() {
         int compareVersion = compareVersion("1.1.0.23", "1.1.0");
         System.out.println("compareVersion = " + compareVersion);
+    }
+
+    /**
+     * calculate
+     *
+     * @author lf
+     * @time 2020-02-23 21:47:26
+     * @param expression expression
+     * @return int
+     */
+    private int calculate(String expression) {
+        // deal with the blank letters
+        expression = expression.replaceAll("\\s", "");
+        if (!expression.matches("^[1-9]\\d*([+\\-*/][1-9]\\d*){1,10}")) {
+            throw new RuntimeException("Illegal expression.");
+        }
+        String[] operatorNumbers = expression.split("[+\\-*/]");
+        char[] operatorChars = expression.replaceAll("[^+\\-*/]", "").toCharArray();
+        List<Character> operators = new ArrayList<>();
+        for (char c : operatorChars) {
+            operators.add(c);
+        }
+        boolean oneLevel = validateOneLevel(operators);
+        if (!oneLevel) {
+            dealMixLevel(operatorNumbers, operators);
+        }
+        return singleLevelOperate(operatorNumbers, operators);
+    }
+
+    /**
+     * mix level operate
+     *
+     * @author lf
+     * @time 2020-02-23 21:22:59
+     * @param operatorNumbers operator numbers
+     * @param operators operators
+     */
+    private void mixLevelOperate(String[] operatorNumbers, List<Character> operators) {
+        for (int i = 0; i < operators.size(); i++) {
+            Character operator = operators.get(i);
+            if (level(operator) == 2) {
+                operatorNumbers[i + 1] = operation(Integer.parseInt(operatorNumbers[i]), Integer.parseInt(operatorNumbers[i + 1]), operator) + "";
+                operatorNumbers[i] = "0";
+                operators.set(i, '+');
+            }
+        }
+    }
+
+    /**
+     * deal mix level
+     *
+     * @author lf
+     * @time 2020-02-23 21:39:02
+     * @param operatorNumbers operator numbers
+     * @param operators operators
+     */
+    private void dealMixLevel(String[] operatorNumbers, List<Character> operators) {
+        while (!validateOneLevel(operators)) {
+            mixLevelOperate(operatorNumbers, operators);
+        }
+    }
+
+    /**
+     * validate one level
+     *
+     * @author lf
+     * @time 2020-02-23 21:16:50
+     * @param operators operators
+     * @return boolean
+     */
+    private boolean validateOneLevel(List<Character> operators) {
+        return ((operators.contains('*') || operators.contains('/'))
+                && !operators.contains('+') && !operators.contains('-'))
+                || ((operators.contains('+') || operators.contains('-'))
+                && !operators.contains('*') && !operators.contains('/'));
+    }
+
+    /**
+     * single level operate
+     *
+     * @author lf
+     * @time 2020-02-23 21:14:36
+     * @param operatorNumbers operator numbers
+     * @param operators operators
+     * @return int
+     */
+    private int singleLevelOperate(String[] operatorNumbers, List<Character> operators) {
+        int index = 0;
+        int result = Integer.parseInt(operatorNumbers[0]);
+        for (int i = 1; i < operatorNumbers.length; i++) {
+            Character operator = operators.get(index++);
+            int nextOperatorNumber = Integer.parseInt(operatorNumbers[i]);
+            result = operation(result, nextOperatorNumber, operator);
+        }
+        return result;
+    }
+
+    /**
+     * operation
+     *
+     * @author lf
+     * @time 2020-02-23 21:12:06
+     * @param oneOperatorNumber one operator number
+     * @param nextOperatorNumber next operator number
+     * @param operator operator
+     * @return int
+     */
+    private int operation(int oneOperatorNumber, int nextOperatorNumber, Character operator) {
+        switch (operator) {
+            case '+': {
+                oneOperatorNumber += nextOperatorNumber;
+                break;
+            }
+            case '-': {
+                oneOperatorNumber -= nextOperatorNumber;
+                break;
+            }
+            case '*': {
+                oneOperatorNumber *= nextOperatorNumber;
+                break;
+            }
+            case '/': {
+                oneOperatorNumber /= nextOperatorNumber;
+                break;
+            }
+            default:
+        }
+        return oneOperatorNumber;
+    }
+
+    /**
+     * level
+     *
+     * @author lf
+     * @time 2020-02-23 20:57:11
+     * @param operator operator
+     * @return int
+     */
+    private int level(Character operator) {
+        if (operator == '+' || operator == '-') {
+            return 1;
+        }
+        return 2;
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(calculate("2+3"));
+        System.out.println(calculate("2+3*2/3"));
     }
 }
