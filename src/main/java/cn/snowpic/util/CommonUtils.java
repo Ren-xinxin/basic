@@ -6,6 +6,7 @@ package cn.snowpic.util;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CommonUtils {
 
@@ -81,5 +82,21 @@ public class CommonUtils {
             result.add(c);
         }
         return result;
+    }
+
+    /**
+     * convert2 stream
+     *
+     * @author lf
+     * @time 2020-02-23 20:43:21
+     * @param chars chars
+     * @return @Stream<Character>
+     */
+    public Stream<Character> convert2Stream(char[] chars) {
+        List<Character> list = new ArrayList<>();
+        for (char c : chars) {
+            list.add(c);
+        }
+        return list.stream();
     }
 }
