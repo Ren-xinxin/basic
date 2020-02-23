@@ -92,7 +92,7 @@ public class CommonUtils {
      * @param chars chars
      * @return @Stream<Character>
      */
-    public Stream<Character> convert2Stream(char[] chars) {
+    public static Stream<Character> convert2Stream(char[] chars) {
         List<Character> list = new ArrayList<>();
         for (char c : chars) {
             list.add(c);
