@@ -6,6 +6,7 @@ package cn.snowpic.year_2020.month_02.day_27;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,5 +39,50 @@ public class GenericTest {
     public void test1() {
         String multiply = complexMultiply("2 + 3i", "1 - 6i");
         System.out.println("multiply = " + multiply);
+    }
+
+    /**
+     * minimum minutes
+     *
+     * @author lf
+     * @time 2020-02-27 23:06:55
+     * @param inputs inputs
+     * @return int
+     */
+    private int minimumMinutes(String... inputs) {
+        String display = Arrays.toString(inputs).replaceAll("\\s+", "");
+        if (!display.matches("^\\[(\\d{2}:\\d{2})(,\\d{2}:\\d{2}){1,9}]$")) {
+            throw new IllegalArgumentException("Input is incorrect.");
+        }
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < inputs.length - 1; i++) {
+            for (int j = i + 1; j < inputs.length; j++) {
+                int one = parseMinutes(inputs[i]);
+                int another = parseMinutes(inputs[j]);
+                int abs = Math.abs(one - another);
+                // update minimum value
+                min = Math.min(min, Math.min(abs, 24 * 60 - abs));
+            }
+        }
+        return min;
+    }
+
+    /**
+     * parse minutes
+     *
+     * @author lf
+     * @time 2020-02-27 22:59:13
+     * @param time time
+     * @return int
+     */
+    private int parseMinutes(String time) {
+        String[] split = time.split(":");
+        return Integer.parseInt(split[0].trim()) * 60 + Integer.parseInt(split[1].trim());
+    }
+
+    @Test
+    public void test2() {
+        int min = minimumMinutes("23:59", "00:00");
+        System.out.println("min = " + min);
     }
 }
