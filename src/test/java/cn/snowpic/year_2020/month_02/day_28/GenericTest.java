@@ -6,6 +6,10 @@ package cn.snowpic.year_2020.month_02.day_28;
 
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringJoiner;
 
 /**
@@ -68,5 +72,21 @@ public class GenericTest {
         int bigger2 = nextBigger(21);
         System.out.println("bigger1 = " + bigger1);
         System.out.println("bigger2 = " + bigger2);
+    }
+
+    @Test
+    public void test3() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = sdf.parse("2020-02-29 00:00:00");
+        System.out.println("date = " + date);
+
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(1996, Calendar.JANUARY, 6);
+        calendar.add(Calendar.DAY_OF_WEEK, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        System.out.println("calendar = " + calendar.getTime());
     }
 }
