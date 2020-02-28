@@ -39,4 +39,34 @@ public class GenericTest {
         String division = optimalDivision(array);
         System.out.println("division = " + division);
     }
+
+    /**
+     * next bigger
+     *
+     * @author lf
+     * @time 2020-02-28 22:14:00
+     * @param input input
+     * @return int
+     */
+    private int nextBigger(int input) {
+        String value = String.valueOf(input);
+        char[] chars = value.toCharArray();
+        for (int i = chars.length - 1; i > 0; i--) {
+            if (chars[i] > chars[i - 1]) {
+                char temp = chars[i];
+                chars[i] = chars[i - 1];
+                chars[i - 1] = temp;
+                return Integer.parseInt(new String(chars));
+            }
+        }
+        return -1;
+    }
+
+    @Test
+    public void test2() {
+        int bigger1 = nextBigger(12);
+        int bigger2 = nextBigger(21);
+        System.out.println("bigger1 = " + bigger1);
+        System.out.println("bigger2 = " + bigger2);
+    }
 }
