@@ -6,10 +6,7 @@ package cn.snowpic.year_2020.month_02.day_29;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,14 +54,14 @@ public class GenericTest {
      * @param inputs inputs
      * @return String[]
      */
-    private List<List<String>> duplicatedFiles(String... inputs) {
-        Map<String, List<String>> map = new HashMap<>();
+    private List<Set<String>> duplicatedFiles(String... inputs) {
+        Map<String, Set<String>> map = new HashMap<>();
         for (String input : inputs) {
             String[] split = input.split("\\s+");
             for (int i = 1; i < split.length; i++) {
                 String key = split[i].replaceAll(".*(\\(.*\\))", "$1");
-                List<String> list = map.get(key);
-                list = list == null ? new ArrayList<>() : list;
+                Set<String> list = map.get(key);
+                list = list == null ? new HashSet<>() : list;
                 list.add(split[0] + "/" + split[i].substring(0, split[i].indexOf("(")));
                 map.put(key, list);
             }
@@ -76,7 +73,7 @@ public class GenericTest {
 
     @Test
     public void test2() {
-        List<List<String>> files = duplicatedFiles("root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)", "root 4.txt(efgh)");
+        List<Set<String>> files = duplicatedFiles("root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)", "root 4.txt(efgh)");
         System.out.println("files = " + files);
     }
 }
