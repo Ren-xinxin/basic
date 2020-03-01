@@ -99,4 +99,23 @@ public class CommonUtils {
         }
         return list.stream();
     }
+
+    /**
+     * is palindrome
+     *
+     * @author lf
+     * @time 2020-03-01 12:47:23
+     * @param input input
+     * @return boolean
+     */
+    public static boolean isPalindrome(String input) {
+        int left = 0;
+        int right = input.length() - 1;
+        while (left < right) {
+            if (input.charAt(left) != input.charAt(right)) return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
 }
