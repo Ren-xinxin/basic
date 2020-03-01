@@ -95,7 +95,7 @@ public class GenericTest {
      */
     @SuppressWarnings("unchecked")
     private Stack<Character> stackClone(Stack<Character> origin) {
-        return (Stack<Character>) (origin.clone());
+        return (Stack<Character>) origin.clone();
     }
 
     /**
