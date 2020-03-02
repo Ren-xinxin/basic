@@ -6,10 +6,7 @@ package cn.snowpic.year_2020.month_03.day_02;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -104,5 +101,59 @@ public class GenericTest {
         List<String> list = Arrays.asList("/*四大皆空手机打开手机", "这是块注释中间的", "注释结束啦*/", "//行内注释", "real code");
         List<String> deleteComments = deleteComments(list);
         System.out.println("deleteComments = " + deleteComments);
+    }
+
+    /**
+     * split
+     *
+     * @author lf
+     * @time 2020-03-02 14:23:25
+     * @param input input
+     * @return @List<String>
+     */
+    private List<String> split(String input) {
+        int start = 0;
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < input.length(); i++) {
+            String current = input.substring(start, i + 1);
+            if (!contains(input, current, i)) {
+                start = i + 1;
+                result.add(current);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * contains
+     *
+     * @author lf
+     * @time 2020-03-02 14:09:46
+     * @param input input
+     * @param current current
+     * @param index index
+     * @return boolean
+     */
+    private boolean contains(String input, String current, int index) {
+        Set<Character> set = new HashSet<>();
+        for (int i = 0; i < current.length(); i++) {
+            set.add(current.charAt(i));
+        }
+        Iterator<Character> iterator = set.iterator();
+        String last = index + 1 > input.length() - 1 ? "" : input.substring(index + 1);
+        while (iterator.hasNext()) {
+            Character next = iterator.next();
+            if (last.contains(String.valueOf(next))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void test2() {
+        String input = "ababcbacadefegdehijhklij";
+        List<String> split = split(input);
+        System.out.println("split = " + split);
     }
 }
