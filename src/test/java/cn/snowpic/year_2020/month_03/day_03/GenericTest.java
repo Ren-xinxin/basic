@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * generic test
@@ -100,7 +101,30 @@ public class GenericTest {
     @Test
     public void test1() {
         int[] input = {1, 1, 2};
-        int rabbitNumber = minimumRabbitNumber(input);
+        int rabbitNumber = minRabbitNumber(input);
         System.out.println("rabbitNumber = " + rabbitNumber);
+    }
+
+    /**
+     * min rabbit number
+     *
+     * @author lf
+     * @time 2020-03-03 20:42:46
+     * @param numbers numbers
+     * @return int
+     */
+    private int minRabbitNumber(int[] numbers) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int number : numbers) {
+            int key = number + 1;
+            Integer current = map.get(key);
+            map.put(key, current == null ? 1 : ++current);
+        }
+        AtomicInteger count = new AtomicInteger();
+        map.forEach((k, v) -> {
+            int repeat = v % k == 0 ? v / k : v / k + 1;
+            count.getAndAdd(repeat * k);
+        });
+        return count.get();
     }
 }
