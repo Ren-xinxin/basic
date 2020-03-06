@@ -83,7 +83,61 @@ public class GenericTest {
     @Test
     public void test1() {
         int[][] graph = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
-        boolean bipartite = isBipartite(graph);
+        boolean bipartite = bipartite(graph);
         System.out.println("bipartite = " + bipartite);
+
+        int[][] graph1 = {{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}};
+
+        boolean bipartite1 = bipartite(graph1);
+        System.out.println("bipartite1 = " + bipartite1);
+    }
+
+    /**
+     * bipartite
+     *
+     * @author lf
+     * @time 2020-03-06 22:12:21
+     * @param graph graph
+     * @return boolean
+     */
+    private boolean bipartite(int[][] graph) {
+        final State[] states = new State[graph.length];
+        Arrays.fill(states, State.UNDEFINED);
+        for (int i = 0; i < graph.length; i++) {
+            // get related points' state.
+            State temp = State.UNDEFINED;
+            for (int j : graph[i]) {
+                State relatedSate = states[j];
+                if (relatedSate == State.UNDEFINED) continue;
+                if (temp == State.UNDEFINED) temp = relatedSate;
+                // if there are different state in related point, return false.
+                if (temp != relatedSate) return false;
+            }
+            State currentSate = states[i];
+            // if the origin's state is similar as the temp, return false.
+            if (currentSate != State.UNDEFINED && currentSate == temp) return false;
+            State requiredSate = (temp == State.UNDEFINED || temp == State.BLUE) ? State.RED : State.BLUE;
+            if (currentSate == State.UNDEFINED) states[i] = requiredSate;
+            // fill all the related points' state with the opposite.
+            for (int index : graph[i]) {
+                states[index] = State.negate(requiredSate);
+            }
+        }
+        return true;
+    }
+
+    private enum State {
+        RED, UNDEFINED, BLUE;
+
+        public static State negate(State origin) {
+            switch (origin) {
+                case RED:
+                    return BLUE;
+                case BLUE:
+                    return RED;
+                default:
+                    return null;
+            }
+        }
     }
 }
