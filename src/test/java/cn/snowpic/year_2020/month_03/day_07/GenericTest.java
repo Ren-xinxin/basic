@@ -125,4 +125,36 @@ public class GenericTest {
         List<String> coordinates = getCoordinates(input);
         System.out.println("coordinates = " + coordinates);
     }
+
+    /**
+     * blur info
+     *
+     * @author lf
+     * @time 2020-03-07 15:46:04
+     * @param info info
+     * @return String
+     */
+    private String blurInfo(String info) {
+        info = info.replaceAll("[() ,\\-]", "").toLowerCase();
+        if (!info.matches("^[a-z][a-z0-9_]*[a-z0-9_]@[a-z][a-z0-9_]*(\\.com|\\.cn|\\.com\\.cn)$")
+                && !info.matches("^(\\d{2})?\\d{10}$")) {
+            throw new IllegalArgumentException("Info format is illegal.");
+        }
+        if (info.contains("@")) {
+            return info.replaceAll("^(.).*(.)(@.+)$", "$1*****$2$3");
+        }
+        String result = info.replaceAll("^.*(\\d{4})$", "*_*_$1");
+        return info.matches("^\\d{12}$") ? "+-" + result : result;
+    }
+
+    @Test
+    public void test2() {
+        String info1 = "LeetCode@LeetCode.com";
+        String blurred1 = blurInfo(info1);
+        System.out.println("blurred1 = " + blurred1);
+
+        String info2 = "1234(56)7890";
+        String blurred2 = blurInfo(info2);
+        System.out.println("blurred2 = " + blurred2);
+    }
 }
