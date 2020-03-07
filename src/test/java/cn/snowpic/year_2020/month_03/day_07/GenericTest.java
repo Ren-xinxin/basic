@@ -157,4 +157,25 @@ public class GenericTest {
         String blurred2 = blurInfo(info2);
         System.out.println("blurred2 = " + blurred2);
     }
+
+    @Test
+    public void test3() {
+        new RenXin().test((k, u, z) -> {
+            System.out.println(k + u + z);
+        });
+    }
+}
+
+class RenXin {
+
+    private int[] data = {2, 3, 4};
+
+    void test(MyConsumer<Integer, Integer, Integer> action) {
+        action.accept(data[0], data[1], data[2]);
+    }
+}
+
+@FunctionalInterface
+interface MyConsumer<T, U, Z> {
+    void accept(T t, U u, Z z);
 }
