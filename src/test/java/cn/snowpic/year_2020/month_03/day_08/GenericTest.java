@@ -62,7 +62,7 @@ public class GenericTest {
             }
         }
         for (int i = 1; i <= originLimit; i++) {
-            play(originLimit, stopLimit, targetLimit, currentTotal + i, targetCount, allCount, weight / 10);
+            play(originLimit, stopLimit, targetLimit, currentTotal + i, targetCount, allCount, weight / originLimit);
         }
     }
 
