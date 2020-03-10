@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * generic test
@@ -44,5 +45,30 @@ public class GenericTest {
         Element price = document.getElementById("JsummaryPriceTrend");
         System.out.println("title = " + price);
         //System.out.println("result = " + result);
+        // url encode.
+        System.out.println(URLEncoder.encode("九州风神玄冰400", "gbk"));
+    }
+
+    private String shiftLetters(String input, int[] shifts) {
+        if (shifts.length > input.length()) {
+            throw new RuntimeException("Incorrect params.");
+        }
+        final int limit = 'z';
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < shifts.length; i++) {
+            final int offset = shifts[i];
+            for (int j = 0; j <= i; j++) {
+                chars[j] += offset;
+                chars[j] = chars[j] > limit ? (char) ((chars[j] - limit) % 26 - 1 + 'a') : chars[j];
+            }
+        }
+        return new String(chars);
+    }
+
+    @Test
+    public void test2() {
+        int[] shifts = {3, 5, 9};
+        String letters = shiftLetters("abc", shifts);
+        System.out.println("letters = " + letters);
     }
 }
