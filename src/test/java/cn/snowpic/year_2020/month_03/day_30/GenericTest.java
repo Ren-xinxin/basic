@@ -80,13 +80,15 @@ public class GenericTest {
     private int resolveScore(String input, AtomicInteger cursor) {
         int counter = 0;
         int sum = 1;
+        // whether first time enter flag.
         boolean flag = true;
         for (; cursor.get() < input.length(); cursor.getAndIncrement()) {
             char curr = input.charAt(cursor.get());
             if (curr == '(' && flag) {
                 counter++;
             } else if (curr == ')') {
-                if (--counter < 0) {
+                if (--counter < 0) { // the counter is out of bound, it's incorrect.
+                    // roll back the cursor.
                     cursor.getAndDecrement();
                     return sum;
                 }
@@ -94,8 +96,10 @@ public class GenericTest {
                     flag = false;
                     continue;
                 }
+                // power up the value base on 2, left move.
                 sum <<= 1;
             } else {
+                // add the next depth value.
                 sum += resolveScore(input, cursor);
             }
         }
