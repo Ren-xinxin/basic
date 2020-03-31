@@ -145,4 +145,52 @@ public class GenericTest {
             throw new IllegalArgumentException("Input's format is illegal.");
         }
     }
+
+    /**
+     * fuck score
+     *
+     * @author Little Flower
+     * @date 2020-03-31 21:27:50
+     * @param input input
+     * @return int
+     */
+    private int fuckScore(String input) {
+        checkFormat(input);
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < input.length(); i++) {
+            char curr = input.charAt(i);
+            if (curr == '(') {
+                deque.push(-1);
+            } else {
+                Integer peek = deque.peek();
+                if (peek != null && peek == -1) {
+                    deque.pop();
+                    deque.push(1);
+                } else {
+                    int t = 0;
+                    while (!deque.isEmpty()) {
+                        int temp = deque.pop();
+                        if (temp == -1) {
+                            break;
+                        }
+                        t += temp;
+                    }
+                    deque.push(2 * t);
+                }
+            }
+        }
+        int sum = 0;
+        while (!deque.isEmpty()) {
+            sum += deque.pop();
+        }
+        return sum;
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(fuckScore("()"));
+        System.out.println(fuckScore("(())"));
+        System.out.println(fuckScore("()()"));
+        System.out.println(fuckScore("(()(()))"));
+    }
 }
