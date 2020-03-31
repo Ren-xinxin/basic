@@ -74,24 +74,29 @@ public class GenericTest {
      * @author Little Flower
      * @date 2020-03-30 22:48:02
      * @param input input
-     * @param start start
+     * @param cursor cursor
      * @return int
      */
-    private int resolveScore(String input, AtomicInteger start) {
-        int pow = -1;
-        int sum = 0;
-        boolean flag = false;
-        for (int i = start.get() + 1; i < input.length(); i++) {
-            start.set(i);
-            char curr = input.charAt(i);
-            if (curr == ')') {
-                pow++;
-                flag = true;
-            } else if (curr == '(' && flag) {
-                sum = (int) Math.pow(2, pow);
-                pow = -1;
-                sum += resolveScore(input, start);
-                i = start.get();
+    private int resolveScore(String input, AtomicInteger cursor) {
+        int counter = 0;
+        int sum = 1;
+        boolean flag = true;
+        for (; cursor.get() < input.length(); cursor.getAndIncrement()) {
+            char curr = input.charAt(cursor.get());
+            if (curr == '(' && flag) {
+                counter++;
+            } else if (curr == ')') {
+                if (--counter < 0) {
+                    cursor.getAndDecrement();
+                    return sum;
+                }
+                if (flag) {
+                    flag = false;
+                    continue;
+                }
+                sum <<= 1;
+            } else {
+                sum += resolveScore(input, cursor);
             }
         }
         return sum;
