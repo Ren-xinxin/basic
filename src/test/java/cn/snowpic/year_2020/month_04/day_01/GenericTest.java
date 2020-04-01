@@ -69,8 +69,8 @@ public class GenericTest {
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < sub.length(); i++) {
             Character key = sub.charAt(i);
-            Integer value = map.get(key);
-            map.put(key, value == null ? 1 : value + 1);
+            Integer value = map.getOrDefault(key, 0);
+            map.put(key, value + 1);
         }
         return map;
     }
