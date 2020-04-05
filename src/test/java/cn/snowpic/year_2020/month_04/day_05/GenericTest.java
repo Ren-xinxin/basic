@@ -24,7 +24,7 @@ public class GenericTest {
      * @return boolean
      */
     private boolean validateNumber(String input) {
-        return input != null && input.matches("^0|([1-9]\\d|0)*\\.\\d*[1-9]|[1-9]\\d*e[1-9]\\d*$");
+        return input != null && input.matches("^([1-9]\\d*|0)(\\.\\d*[1-9])?|[1-9]\\d*e[1-9]\\d*$");
     }
 
     @Test
