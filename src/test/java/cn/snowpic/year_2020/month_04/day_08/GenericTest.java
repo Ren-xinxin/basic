@@ -10,6 +10,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GenericTest {
 
+    /**
+     * min steps
+     *
+     * @author Little Flower
+     * @date 2020-04-09 00:19:56
+     * @param origin origin
+     * @param target target
+     * @return int
+     */
     private int minSteps(String origin, final String target) {
         int max = Integer.MIN_VALUE;
         StepInfo result = null;
@@ -64,6 +73,13 @@ public class GenericTest {
         }
     }
 
+    /**
+     * step info
+     *
+     * @className StepInfo
+     * @author Little Flower
+     * @date 2020-04-09 00:20:06
+     */
     private static class StepInfo {
         int ol;
         int or;
