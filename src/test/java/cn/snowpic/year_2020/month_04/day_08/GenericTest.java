@@ -20,23 +20,9 @@ public class GenericTest {
      * @return int
      */
     private int minSteps(String origin, final String target) {
-        int max = Integer.MIN_VALUE;
-        StepInfo result = null;
-        for (int i = 0; i < target.length(); i++) {
-            for (int j = 0; j < origin.length(); j++) {
-                StepInfo info = new StepInfo();
-                int steps = multiplexElements(origin, target, j, i, 0, new AtomicBoolean(true), info);
-                if (steps > max) {
-                    max = steps;
-                    result = info;
-                }
-            }
-        }
-        if (result == null) throw new RuntimeException("sb");
-        int left = Math.max(result.ol, result.tl);
-        int middle = Math.abs((result.or - result.ol + 1) - (result.tr - result.tl + 1));
-        int right = Math.max(origin.length() - 1 - result.or, target.length() - 1 - result.tr);
-        return left + middle + right;
+        StepInfo info = new StepInfo(origin, target);
+        info.count = multiplexElements(origin, target, 0, 0, 0, new AtomicBoolean(true), info);
+        return info.steps();
     }
 
     /**
@@ -81,15 +67,52 @@ public class GenericTest {
      * @date 2020-04-09 00:20:06
      */
     private static class StepInfo {
-        int ol;
-        int or;
-        int tl;
-        int tr;
+        private int ol;
+        private int or;
+        private int tl;
+        private int tr;
+
+        private final String origin;
+        private final String target;
+
+        private int count = -1;
+
+        public StepInfo(String origin, String target) {
+            this.origin = origin;
+            this.target = target;
+        }
+
+        private int left() {
+            return Math.max(ol, tl);
+        }
+
+        private int middle() {
+            if (count == -1) {
+                throw new RuntimeException("Count must be initialize");
+            }
+            int tc = (tr - tl + 1) - count;
+            int oc = (or - ol + 1) - count;
+            return Math.max(tc, oc);
+        }
+
+        private int right() {
+            int orc = origin.length() - 1 - or;
+            int trc = target.length() - 1 - tr;
+            return Math.max(orc, trc);
+        }
+
+        private int steps() {
+            return left() + middle() + right();
+        }
     }
 
     @Test
     public void test1() {
         int steps = minSteps("ac", "abc");
         System.out.println("steps = " + steps);
+        int steps1 = minSteps("aac", "abc");
+        System.out.println("steps1 = " + steps1);
+        int steps2 = minSteps("horse", "ros");
+        System.out.println("steps2 = " + steps2);
     }
 }
