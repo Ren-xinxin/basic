@@ -112,7 +112,42 @@ public class GenericTest {
         System.out.println("steps = " + steps);
         int steps1 = minSteps("aac", "abc");
         System.out.println("steps1 = " + steps1);
-        int steps2 = minSteps("horse", "ros");
+        int steps2 = minimumDistance("horse", "ros");
         System.out.println("steps2 = " + steps2);
+    }
+
+    /**
+     * minimum distance
+     *
+     * @author Little Flower
+     * @date 2020-04-10 23:41:25
+     * @param origin origin
+     * @param target target
+     * @return int
+     */
+    private int minimumDistance(String origin, String target) {
+        int ol = origin.length();
+        int tl = target.length();
+        char[] ocs = origin.toCharArray();
+        char[] tcs = target.toCharArray();
+        int[][] tables = new int[ol + 1][tl + 1];
+
+        for (int i = 0; i < ol + 1; i++) {
+            tables[i][0] = i;
+        }
+
+        for (int i = 0; i < tl + 1; i++) {
+            tables[0][i] = i;
+        }
+        for (int i = 1; i < ol + 1; i++) {
+            for (int j = 1; j < tl + 1; j++) {
+                int cost = 0;
+                if (ocs[i-1] != tcs[j-1]) {
+                    cost = 1;
+                }
+                tables[i][j] = Math.min(Math.min(tables[i - 1][j] + 1, tables[i][j - 1] + 1), tables[i - 1][j - 1] + cost);
+            }
+        }
+        return tables[ol][tl];
     }
 }
