@@ -20,9 +20,17 @@ public class GenericTest {
      * @return int
      */
     private int minSteps(String origin, final String target) {
-        StepInfo info = new StepInfo(origin, target);
-        info.count = multiplexElements(origin, target, 0, 0, 0, new AtomicBoolean(true), info);
-        return info.steps();
+        StepInfo result = new StepInfo(origin, target);
+        int count = Integer.MIN_VALUE;
+        for (int i = 0; i < target.length(); i++) {
+            StepInfo info = new StepInfo(origin, target);
+            info.count = multiplexElements(origin, target, 0, i, 0, new AtomicBoolean(true), info);
+            if (info.count > count || (info.count == count && info.gap() < result.gap())) {
+                result = info;
+                count = info.count;
+            }
+        }
+        return result.steps();
     }
 
     /**
@@ -104,15 +112,19 @@ public class GenericTest {
         private int steps() {
             return left() + middle() + right();
         }
+
+        private int gap() {
+            return tr - tl + 1;
+        }
     }
 
     @Test
     public void test1() {
-        int steps = minSteps("ac", "abc");
+        /*int steps = minSteps("ac", "abc");
         System.out.println("steps = " + steps);
         int steps1 = minSteps("aac", "abc");
-        System.out.println("steps1 = " + steps1);
-        int steps2 = minimumDistance("horse", "ros");
+        System.out.println("steps1 = " + steps1);*/
+        int steps2 = minSteps("horse", "ros");
         System.out.println("steps2 = " + steps2);
     }
 
@@ -142,7 +154,7 @@ public class GenericTest {
         for (int i = 1; i < ol + 1; i++) {
             for (int j = 1; j < tl + 1; j++) {
                 int cost = 0;
-                if (ocs[i-1] != tcs[j-1]) {
+                if (ocs[i - 1] != tcs[j - 1]) {
                     cost = 1;
                 }
                 tables[i][j] = Math.min(Math.min(tables[i - 1][j] + 1, tables[i][j - 1] + 1), tables[i - 1][j - 1] + cost);
