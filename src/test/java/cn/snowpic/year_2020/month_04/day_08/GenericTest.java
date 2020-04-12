@@ -120,10 +120,10 @@ public class GenericTest {
 
     @Test
     public void test1() {
-        /*int steps = minSteps("ac", "abc");
+        int steps = minSteps("ac", "abc");
         System.out.println("steps = " + steps);
         int steps1 = minSteps("aac", "abc");
-        System.out.println("steps1 = " + steps1);*/
+        System.out.println("steps1 = " + steps1);
         int steps2 = minSteps("horse", "ros");
         System.out.println("steps2 = " + steps2);
     }
