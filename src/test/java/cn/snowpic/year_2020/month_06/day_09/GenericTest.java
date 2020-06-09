@@ -1,17 +1,17 @@
-package cn.snowpic;
+/*
+ * Copyright(c) snowpic.cn 2019-2020. All rights reserved.
+ */
+
+package cn.snowpic.year_2020.month_06.day_09;
+
+import org.junit.Test;
 
 import java.util.Scanner;
 
-/**
- * @className ScannerTest
- * @description
- * @author lf
- * @time 2019/7/26 22:30
- **/
+public class GenericTest {
 
-public class ScannerTest {
-
-    public static void main(String[] args) {
+    @Test
+    public void test1() {
         System.out.println("请输入一个3位数字");
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -19,13 +19,14 @@ public class ScannerTest {
             String[] split = next.split("");
             int target = Integer.parseInt(next);
             int sum = 0;
+            int pow = 0;
             for (int index = split.length - 1; index >= 0; index--) {
-                sum += Math.pow(Integer.parseInt(split[index]), 3);
+                sum += Integer.parseInt(split[index]) * Math.pow(10, pow++);
             }
             if (sum == target) {
-                System.out.println(1);
-            } else {
                 System.out.println(0);
+            } else {
+                System.out.println(1);
             }
         }
     }
