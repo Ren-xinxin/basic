@@ -6,6 +6,8 @@ package cn.snowpic.year_2020.month_09.day_06;
 
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class GenericTest {
     private static class Aa {
         private String age;
+
+        private Aa itself;
 
         @Override
         public boolean equals(Object o) {
@@ -31,7 +35,7 @@ public class GenericTest {
     }
 
     @Test
-    public void test1() {
+    public void test1() throws NoSuchFieldException, IllegalAccessException {
         final HashSet<Aa> set = new HashSet<>();
         final Aa e = new Aa();
         e.age = "22";
@@ -47,5 +51,19 @@ public class GenericTest {
         final Aa o = new Aa();
         o.age="66";
         list.remove(o);
+        final Class<? extends Aa> aa = e.getClass();
+        final Field field = aa.getDeclaredField("age");
+        final Field itself = aa.getDeclaredField("itself");
+        final Type type = field.getGenericType();
+        System.out.println(type.getTypeName());
+        System.out.println(itself.getType().getName());
+        itself.setAccessible(true);
+        final Object o1 = itself.get(o);
+        System.out.println();
+
+        list.forEach(a->{
+            final String len = a.itself.age;
+            System.out.println(len);
+        });
     }
 }
