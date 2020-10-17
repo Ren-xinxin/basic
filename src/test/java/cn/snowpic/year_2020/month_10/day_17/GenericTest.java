@@ -12,4 +12,10 @@ public class GenericTest {
         System.out.println("hello");
         InnerClassSingleton.getInstance();
     }
+
+    @Test
+    public void test2() {
+        final EnumSingleton instance = EnumSingleton.INSTANCE;
+        System.out.println(instance.name());
+    }
 }
