@@ -4,6 +4,7 @@
 
 package cn.snowpic.year_2020.month_10.day_17;
 
+@SuppressWarnings("ALL")
 public class InnerClassSingleton {
     private static class Instance {
         public Instance() {
@@ -16,8 +17,6 @@ public class InnerClassSingleton {
     private InnerClassSingleton() {
         System.out.println("InnerClassSingleton constructor");
     }
-
-    private int age;
 
     public static InnerClassSingleton getInstance(){
         return Instance.INSTANCE;

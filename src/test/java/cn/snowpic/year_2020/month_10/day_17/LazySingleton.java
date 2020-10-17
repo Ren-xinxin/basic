@@ -4,6 +4,7 @@
 
 package cn.snowpic.year_2020.month_10.day_17;
 
+@SuppressWarnings("InstantiationOfUtilityClass")
 public class LazySingleton {
     private static LazySingleton instance;
 

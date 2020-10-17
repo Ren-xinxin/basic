@@ -4,10 +4,9 @@
 
 package cn.snowpic.year_2020.month_10.day_17;
 
+@SuppressWarnings("InstantiationOfUtilityClass")
 public class DoubleCheckLockSingleton {
     private static DoubleCheckLockSingleton instance;
-
-    private int some;
 
     private DoubleCheckLockSingleton() {
     }

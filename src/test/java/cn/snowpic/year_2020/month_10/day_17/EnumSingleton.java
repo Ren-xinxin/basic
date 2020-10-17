@@ -6,9 +6,4 @@ package cn.snowpic.year_2020.month_10.day_17;
 
 public enum EnumSingleton {
     INSTANCE;
-
-    private int age;
-
-   private EnumSingleton() {
-    }
 }
