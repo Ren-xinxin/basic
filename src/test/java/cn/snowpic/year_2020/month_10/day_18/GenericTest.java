@@ -46,7 +46,7 @@ public class GenericTest {
 
         int depth = -1;
 
-        AtomicInteger counter = new AtomicInteger(1);
+        AtomicInteger counter = new AtomicInteger();
         for (Book book : books) {
             counter.set(1);
             getDepth(book, counter, true);
