@@ -57,7 +57,8 @@ public class GenericTest {
         int max = nums[0];
         int positive = nums[0];
         int negative = nums[0];
-        for (int num : nums) {
+        for (int i = 1; i < nums.length; i++) {
+            int num = nums[i];
             int temp = positive;
             positive = Math.max(num, num * (num > 0 ? positive : negative));
             negative = Math.min(num, num * (num > 0 ? negative : temp));
