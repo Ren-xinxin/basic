@@ -34,7 +34,7 @@ public class GenericTest {
             int next = i + 1;
             for (int j = next; j <= nums.length; j++) {
                 int temporary = nums[i];
-                for (int k = next; k < nums.length; k++) {
+                for (int k = next; k < j; k++) {
                     temporary *= nums[k];
                 }
                 if (temporary > max) {
@@ -63,7 +63,7 @@ public class GenericTest {
             positive = Math.max(num, num * (num > 0 ? positive : negative));
             negative = Math.min(num, num * (num > 0 ? negative : temp));
 
-            max = Math.max(positive, negative);
+            max = Math.max(positive, max);
         }
         return max;
     }
