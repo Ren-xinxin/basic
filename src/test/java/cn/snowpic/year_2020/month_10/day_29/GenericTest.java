@@ -6,8 +6,21 @@ package cn.snowpic.year_2020.month_10.day_29;
 
 import org.junit.Test;
 
+/**
+ * generic test
+ *
+ * @className GenericTest
+ * @author Little Flower
+ * @date 2020-10-29 23:44:51
+ */
 public class GenericTest {
 
+    /**
+     * test1
+     *
+     * @author Little Flower
+     * @date 2020-10-29 23:44:48
+     */
     @Test
     public void test1() {
         int[] nums = {2, 3, 3, 2};
@@ -25,6 +38,15 @@ public class GenericTest {
         }
     }
 
+    /**
+     * remove elements
+     *
+     * @author Little Flower
+     * @date 2020-10-29 23:44:43
+     * @param nums nums
+     * @param val val
+     * @return int
+     */
     private int removeElements(int[] nums, int val) {
         int index = 0;
         for (int i = 0; i < nums.length; i++) {
