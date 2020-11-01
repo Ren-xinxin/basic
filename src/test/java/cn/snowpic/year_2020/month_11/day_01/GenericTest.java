@@ -16,6 +16,9 @@ public class GenericTest {
 
         int index2 = searchInsertedIndex(nums, 2);
         System.out.println(index2);
+
+        int index3= searchInsertedIndex(nums, 7);
+        System.out.println(index3);
     }
 
     private int searchInsertedIndex(int[] nums, int target) {
