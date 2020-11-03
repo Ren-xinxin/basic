@@ -13,18 +13,18 @@ public class GenericTest {
     @Test
     public void test1() {
         int[] nums1 = {1, 2, 3};
-        int[] result1 = plusOne(nums1);
+        int[] result1 = plusOne(nums1, 9);
         System.out.println(Arrays.toString(result1));
 
         int[] nums2 = {9, 9, 9};
-        int[] result2 = plusOne(nums2);
+        int[] result2 = plusOne(nums2, 3);
         System.out.println(Arrays.toString(result2));
     }
 
-    private int[] plusOne(int[] nums) {
+    private int[] plusOne(int[] nums, int val) {
         int added = 0;
         // plus one
-        nums[nums.length - 1] += 1;
+        nums[nums.length - 1] += val;
 
         for (int i = nums.length - 1; i >= 0; i--) {
             int curr = nums[i] + added;
