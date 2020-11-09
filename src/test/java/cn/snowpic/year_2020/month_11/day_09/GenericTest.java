@@ -13,8 +13,8 @@ public class GenericTest {
 
     @Test
     public void test1() {
-        System.out.println(generatePascalTriangle2(3));
-        System.out.println(generatePascalTriangle2(1));
+        System.out.println(optimizeGenerate(3));
+        System.out.println(optimizeGenerate(1));
     }
 
     private List<Integer> generatePascalTriangle2(int lineIndex) {
@@ -33,5 +33,22 @@ public class GenericTest {
             container.add(line);
         }
         return container.get(container.size() - 1);
+    }
+
+    private List<Integer> optimizeGenerate(int lineIndex) {
+        List<Integer> lastLine = null;
+        for (int i = 0; i <= lineIndex; i++) {
+            List<Integer> curr = new ArrayList<>();
+            curr.add(1);
+            if (lastLine != null) {
+                for (int j = 1; j < i; j++) {
+                    int value = lastLine.get(j - 1) + lastLine.get(j);
+                    curr.add(value);
+                }
+                curr.add(1);
+            }
+            lastLine = curr;
+        }
+        return lastLine;
     }
 }
