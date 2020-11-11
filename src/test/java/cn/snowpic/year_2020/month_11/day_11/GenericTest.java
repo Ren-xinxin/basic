@@ -10,27 +10,50 @@ public class GenericTest {
 
     @Test
     public void test1() {
-        int profit1 = getMaxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        int profit1 = getMaxProfit(new int[]{7, 1, 5, 3, 6, 10});
         System.out.println(profit1);
+
+        int profit2 = getMaxProfit2(new int[]{7, 1, 5, 3, 6, 10});
+        System.out.println(profit2);
     }
 
     private int getMaxProfit(int[] prices) {
         int result = 0;
         int buy = prices[0];
         boolean isSold = false;
-        for (int i = 1; i < prices.length; i++) {
+        for (int i = 1; i < prices.length - 1; i++) {
             int curr = prices[i];
             if (!isSold) {
                 if (curr < buy) {
                     buy = curr;
-                } else {
+                } else if (prices[i + 1] < curr) {
                     result += (curr - buy);
+                    isSold = true;
+                } else if (i == prices.length - 2) {
+                    result += (prices[i + 1] - buy);
                     isSold = true;
                 }
             } else {
                 buy = curr;
                 isSold = false;
             }
+        }
+        return result;
+    }
+
+    private int getMaxProfit2(int[] prices) {
+        int result = 0;
+        int index = 0;
+        while (index < prices.length - 1) {
+            while (index < prices.length - 1 && prices[index] >= prices[index + 1]) {
+                index++;
+            }
+            int valley = prices[index];
+            while (index < prices.length - 1 && prices[index] <= prices[index + 1]) {
+                index++;
+            }
+            int peek = prices[index];
+            result += peek - valley;
         }
         return result;
     }
