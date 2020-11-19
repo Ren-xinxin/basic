@@ -17,6 +17,17 @@ public class GenericTest {
         System.out.println(findDuplicates(new int[]{1, 2, 3, 4}));
     }
 
+    @Test
+    public void test2() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                String msg = String.format("%d * %d = %d", i + 1, j + 1, (i + 1) * (j + 1));
+                System.out.print(msg + "\t");
+            }
+            System.out.println();
+        }
+    }
+
     private boolean findDuplicates(int[] array) {
         Set<Integer> set = new HashSet<>();
         for (int num : array) {
