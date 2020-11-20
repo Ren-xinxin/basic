@@ -4,13 +4,11 @@
 
 package cn.snowpic.year_2020.month_10.day_18;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class GenericTest {
+public class Main4 {
     private static class Book {
         private int l;
         private int w;
@@ -18,9 +16,8 @@ public class GenericTest {
         private Book bottom;
     }
 
-    @Test
-    public void test1() {
-        List<Book> books = new ArrayList<Book>();
+    public static void main(String[] args) {
+        List<Book> books = new ArrayList<>();
         final Book b1 = new Book();
         final Book b2 = new Book();
         final Book b3 = new Book();
@@ -58,24 +55,26 @@ public class GenericTest {
         System.out.println(depth);
     }
 
-    private void setNeighbours(Book curr, Book neighbour) {
+    private static void setNeighbours(Book curr, Book neighbour) {
         if (neighbour.l > curr.l && neighbour.w > curr.w) {
             if (curr.top == null) {
                 curr.top = neighbour;
             } else {
                 setNeighbours(curr.top, neighbour);
+                setNeighbours(curr.bottom, neighbour);
             }
         }
         if (neighbour.l < curr.l && neighbour.w < curr.w) {
             if (curr.bottom == null) {
                 curr.bottom = neighbour;
             } else {
+                setNeighbours(curr.top, neighbour);
                 setNeighbours(curr.bottom, neighbour);
             }
         }
     }
 
-    private void getDepth(Book curr, AtomicInteger count, boolean isTop) {
+    private static void getDepth(Book curr, AtomicInteger count, boolean isTop) {
         if (isTop){
             if (curr.top != null) {
                 count.getAndIncrement();

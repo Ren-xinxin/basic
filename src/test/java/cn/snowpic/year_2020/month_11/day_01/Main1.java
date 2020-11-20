@@ -4,74 +4,53 @@
 
 package cn.snowpic.year_2020.month_11.day_01;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main1 {
     public static void main(String[] args) {
-        // 对于用户不同
-        // n
-        // resA
-        // 3
-        // 15 8 17
-        // 12 20 9
-        // 11 7 5
-        // 24
+        // 每个小朋友都知道自己时候前面小朋友同班
+        // 6/N
+        // 输入3/N 4/Y
+        // 输出
+        // 1/N 2/Y 3/N 4/Y
+        // 1 2
+        // 3 4
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            int users = Integer.parseInt(sc.nextLine());
+            String line = sc.nextLine();
+            String[] children = line.split(" ");
+            List<Integer> class1 = new ArrayList<>();
+            List<Integer> class2 = new ArrayList<>();
 
-            int next = 0;
+            boolean isClass1 = true;
 
-            int sum = 0;
-            List<Map.Entry<Integer, Integer>> nextData = null;
-            for (int i = 0; i < users - 1; i++) {
-                List<Map.Entry<Integer, Integer>> data;
-                if (nextData == null) {
-                    data = getData(sc);
-                } else {
-                    data = nextData;
-                }
-                nextData = getData(sc);
+            class1.add(Integer.parseInt(children[0].split("/")[0]));
 
-                int min = Integer.MAX_VALUE;
-                Map.Entry<Integer, Integer> curr1 = data.get(next);
-                // index
-                int tempCurr = curr1.getKey();
-                for (int k = 0; k < 2; k++) {
-                    Map.Entry<Integer, Integer> nextD = nextData.get(k);
-                    Integer tempNext = nextD.getKey();
-                    if (tempNext != tempCurr) {
-                        int temp = curr1.getValue() + nextD.getValue();
-                        if (temp < min) {
-                            min = temp;
-                            next = k;
-                        }
-                    }
-                }
-
-
-                if (i < users - 2) {
-                    sum += (min - nextData.get(next).getValue());
-                } else {
-                    sum += min;
+            for (int i = 1; i < children.length; i++) {
+                String[] prop = children[i].split("/");
+                Integer num = Integer.parseInt(prop[0]);
+                String isOneClass = prop[1];
+                if ("Y".equals(isOneClass) && isClass1) {
+                    class1.add(num);
+                } else if ("N".equals(isOneClass) && isClass1) {
+                    class2.add(num);
+                    isClass1 = false;
+                } else if ("Y".equals(isOneClass)) {
+                    class2.add(num);
+                    isClass1 = false;
+                } else if ("N".equals(isOneClass)) {
+                    class1.add(num);
+                    isClass1 = true;
                 }
             }
-            System.out.println(sum);
+
+            List<String> c1 = class1.stream().sorted().map(String::valueOf).collect(Collectors.toList());
+            List<String> c2 = class2.stream().sorted().map(String::valueOf).collect(Collectors.toList());
+            System.out.println(String.join(" ", c1));
+            System.out.println(String.join(" ", c2));
         }
-    }
-
-    private static List<Map.Entry<Integer, Integer>> getData(Scanner sc) {
-        String line = sc.nextLine();
-        String[] split = line.split(" ");
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, Integer.parseInt(split[0]));
-        map.put(1, Integer.parseInt(split[1]));
-        map.put(2, Integer.parseInt(split[2]));
-
-        return map.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toList());
     }
 }
