@@ -14,6 +14,14 @@ public class GenericTest {
         System.out.println(count);
     }
 
+    /**
+     * find continuous one
+     *
+     * @author Little Flower
+     * @date 2020-11-26 23:58:20
+     * @param nums nums
+     * @return int
+     */
     private int findContinuousOne(int[] nums) {
         int max = 0;
         int count = 0;
