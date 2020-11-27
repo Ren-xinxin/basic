@@ -8,6 +8,12 @@ import org.junit.Test;
 
 public class GenericTest {
 
+    /**
+     * test1
+     *
+     * @author Little Flower
+     * @date 2020-11-27 23:20:32
+     */
     @Test
     public void test1() {
         int count = findContinuousOne(new int[]{1, 1, 0, 1, 1, 1});
