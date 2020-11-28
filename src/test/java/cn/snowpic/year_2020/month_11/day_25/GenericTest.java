@@ -6,6 +6,13 @@ package cn.snowpic.year_2020.month_11.day_25;
 
 import org.junit.Test;
 
+/**
+ * generic test
+ *
+ * @className GenericTest
+ * @author Little Flower
+ * @date 2020-11-28 23:57:03
+ */
 public class GenericTest {
 
     /**
