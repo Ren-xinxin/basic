@@ -39,6 +39,14 @@ public class GenericTest {
         return result.stream().mapToInt(Integer::intValue).toArray();
     }
 
+    /**
+     * find disappeared nums
+     *
+     * @author Little Flower
+     * @date 2020-11-29 23:22:14
+     * @param nums nums
+     * @return int[]
+     */
     private int[] findDisappearedNums(int[] nums) {
         int max = Integer.MIN_VALUE;
         for (int num : nums) {
