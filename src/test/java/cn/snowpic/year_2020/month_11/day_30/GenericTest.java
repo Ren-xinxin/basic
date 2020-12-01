@@ -20,6 +20,15 @@ public class GenericTest {
         System.out.println(pairs1);
     }
 
+    /**
+     * find k diff pairs
+     *
+     * @author Little Flower
+     * @date 2020-12-01 23:54:17
+     * @param nums nums
+     * @param k k
+     * @return int
+     */
     private int findKDiffPairs(int[] nums, int k) {
         int counter = 0;
         List<Integer> numList = Arrays.stream(nums).distinct().boxed().collect(Collectors.toList());
