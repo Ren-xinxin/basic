@@ -12,6 +12,12 @@ import java.util.stream.Collectors;
 
 public class GenericTest {
 
+    /**
+     * test1
+     *
+     * @author Little Flower
+     * @date 2020-12-02 23:38:53
+     */
     @Test
     public void test1() {
         int pairs = findKDiffPairs(new int[]{3, 1, 4, 1, 5}, 2);
