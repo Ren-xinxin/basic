@@ -17,6 +17,14 @@ public class GenericTest {
         System.out.println(compress("abc"));
     }
 
+    /**
+     * compress
+     *
+     * @author Little Flower
+     * @date 2020-12-04 23:57:54
+     * @param input input
+     * @return String
+     */
     private String compress(String input) {
         List<Character> key = new ArrayList<>();
         List<Integer> count = new ArrayList<>();
