@@ -11,6 +11,12 @@ import java.util.List;
 
 public class GenericTest {
 
+    /**
+     * test1
+     *
+     * @author Little Flower
+     * @date 2020-12-05 23:52:14
+     */
     @Test
     public void test1() {
         System.out.println(compress("aaabbbaacc"));
