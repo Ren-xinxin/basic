@@ -6,7 +6,7 @@ package cn.snowpic.year_2020.month_12.day_06;
 
 import java.util.Scanner;
 
-public class Main1 {
+public class Main5 {
     public static void main(String[] args) {
         // 1.有n正正整数序列
         // 1,2,3,4,2

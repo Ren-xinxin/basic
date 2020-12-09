@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Main2 {
+public class Main6 {
     public static void main(String[] args) {
         // 1个2数组，0-1
         // 1具有扩散性

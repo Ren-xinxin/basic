@@ -6,7 +6,7 @@ package cn.snowpic.year_2020.month_12.day_06;
 
 import java.util.Scanner;
 
-public class Main3 {
+public class Main7 {
 
     public static void main(String[] args) {
         //
