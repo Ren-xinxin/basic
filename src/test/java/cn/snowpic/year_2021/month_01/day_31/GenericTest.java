@@ -19,13 +19,12 @@ public class GenericTest {
         int max = 0;
         for (int i : array) {
             if (i == 0) {
-                max = Math.max(count, max);
                 count = 0;
             } else {
                 count++;
             }
+            max = Math.max(count, max);
         }
-        max = Math.max(count, max);
         return max;
     }
 }
