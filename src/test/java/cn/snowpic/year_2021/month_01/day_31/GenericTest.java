@@ -39,6 +39,10 @@ public class GenericTest {
         System.out.println(num);
         System.out.println(findKDiffPairs(new int[]{1, 2, 3, 4, 5,}, 1));
         System.out.println(findKDiffPairs(new int[]{1, 3, 1, 5, 4,}, 0));
+
+        System.out.println(findKDiffPairs2(new int[]{3, 1, 4, 1, 5,}, 2));
+        System.out.println(findKDiffPairs2(new int[]{1, 2, 3, 4, 5,}, 1));
+        System.out.println(findKDiffPairs2(new int[]{1, 3, 1, 5, 4,}, 0));
     }
 
     private int findKDiffPairs(int[] array, int k) {
@@ -64,6 +68,27 @@ public class GenericTest {
             }
             if (value != null) {
                 count++;
+            }
+        }
+        return count;
+    }
+
+    private int findKDiffPairs2(int[] array, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : array) {
+            map.merge(i, 1, Integer::sum);
+        }
+        int count = 0;
+        for (Integer key : map.keySet()) {
+            key += k;
+            Integer value = map.get(key);
+            if (value != null) {
+                if (k == 0 && value > 1) {
+                    count++;
+                }
+                if (k != 0) {
+                    count++;
+                }
             }
         }
         return count;
