@@ -24,6 +24,7 @@ public class GenericTest {
         System.out.println(pairs);
         int pairs1 = findKDiffPairs(new int[]{1, 2, 3, 4, 5}, 1);
         System.out.println(pairs1);
+        System.out.println(findKDiffPairs(new int[]{1, 3, 1, 5, 4,}, 0));
     }
 
     /**
