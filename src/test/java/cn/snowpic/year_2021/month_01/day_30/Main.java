@@ -2,7 +2,7 @@
  * Copyright(c) snowpic.cn 2019-2021. All rights reserved.
  */
 
-package cn.snowpic.year_2021.month_01.day_31;
+package cn.snowpic.year_2021.month_01.day_30;
 
 import java.util.Scanner;
 
