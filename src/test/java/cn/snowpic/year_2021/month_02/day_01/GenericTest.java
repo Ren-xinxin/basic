@@ -6,6 +6,7 @@ package cn.snowpic.year_2021.month_02.day_01;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class GenericTest {
@@ -30,5 +31,23 @@ public class GenericTest {
             }
         }
         return result;
+    }
+
+    @Test
+    public void test2() {
+        System.out.println(getFactorial(10));
+        System.out.println(getFactorial(2));
+        System.out.println(getFactorial(1000));
+    }
+
+    private String getFactorial(int n) {
+        return factorial(n).toString();
+    }
+
+    private BigDecimal factorial(int n) {
+        if (n == 0 || n == 1) {
+            return new BigDecimal(1);
+        }
+        return new BigDecimal(n).multiply(factorial(n - 1));
     }
 }
