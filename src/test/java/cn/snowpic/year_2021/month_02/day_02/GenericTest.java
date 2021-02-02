@@ -16,8 +16,9 @@ public class GenericTest {
     }
 
     private int findMinSubarray(int[] array) {
-        int[] copy = new int[array.length];
-        System.arraycopy(array, 0, copy, 0, array.length);
+        // int[] copy = new int[array.length];
+        // System.arraycopy(array, 0, copy, 0, array.length);
+        int[] copy = array.clone();
         Arrays.sort(copy);
         int start = 0;
         int end = array.length - 1;
