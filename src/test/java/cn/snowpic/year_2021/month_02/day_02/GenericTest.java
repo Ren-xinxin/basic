@@ -13,11 +13,10 @@ public class GenericTest {
     public void test1() {
         int len = findMinSubarray(new int[]{2, 6, 4, 8, 10, 9, 15});
         System.out.println(len);
+        System.out.println(findMinSubarray2(new int[]{2, 6, 4, 8, 10, 9, 15}));
     }
 
     private int findMinSubarray(int[] array) {
-        // int[] copy = new int[array.length];
-        // System.arraycopy(array, 0, copy, 0, array.length);
         int[] copy = array.clone();
         Arrays.sort(copy);
         int start = 0;
@@ -30,6 +29,25 @@ public class GenericTest {
             }
             if (!isStart && array[i] == copy[i]) {
                 end = i - 1;
+            }
+        }
+        return end - start + 1;
+    }
+
+    private int findMinSubarray2(int[] array) {
+        int start = 0;
+        int end = 0;
+        int max = array[0];
+        int len = array.length;
+        int min = array[len - 1];
+        for (int i = 0; i < len; i++) {
+            max = Math.max(max, array[i]);
+            min = Math.min(min, array[len - 1 - i]);
+            if (array[i] < max) {
+                end = i;
+            }
+            if (array[len - 1 - i] > min) {
+                start = len - 1 - i;
             }
         }
         return end - start + 1;
