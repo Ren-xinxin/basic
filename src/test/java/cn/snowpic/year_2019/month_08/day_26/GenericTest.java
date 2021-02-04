@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_08.month_08.day_26;
+package cn.snowpic.year_2019.month_08.day_26;
 
 import com.lmax.disruptor.*;
 import org.junit.Test;

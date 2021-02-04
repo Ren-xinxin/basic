@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_09.month_09.day_02;
+package cn.snowpic.year_2019.month_09.day_02;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;

@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_10.month_10.day_12;
+package cn.snowpic.year_2019.month_10.day_12;
 
 import org.I0Itec.zkclient.ZkClient;
 import org.I0Itec.zkclient.ZkConnection;

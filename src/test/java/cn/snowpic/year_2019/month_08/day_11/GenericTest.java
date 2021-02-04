@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_08.month_08.day_11;
+package cn.snowpic.year_2019.month_08.day_11;
 
 import cn.snowpic.util.RxMap;
 import org.junit.Test;

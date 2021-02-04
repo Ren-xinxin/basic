@@ -2,7 +2,7 @@
  * Copyright(c) snowpic.cn 2019-2019.All rights reserved.
  */
 
-package cn.snowpic.year_2019.month_10.month_10.day_26;
+package cn.snowpic.year_2019.month_10.day_26;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;

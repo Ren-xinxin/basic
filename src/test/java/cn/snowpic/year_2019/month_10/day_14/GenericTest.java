@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_10.month_10.day_14;
+package cn.snowpic.year_2019.month_10.day_14;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

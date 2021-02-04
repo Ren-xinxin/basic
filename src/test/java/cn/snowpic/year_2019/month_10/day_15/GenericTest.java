@@ -1,7 +1,7 @@
 /*
  * Copyright(c) snowpic.cn 2019-2019.All rights reserved.
  */
-package cn.snowpic.year_2019.month_10.month_10.day_15;
+package cn.snowpic.year_2019.month_10.day_15;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

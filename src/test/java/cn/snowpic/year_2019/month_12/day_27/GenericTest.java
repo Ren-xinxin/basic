@@ -2,7 +2,7 @@
  * Copyright(c) snowpic.cn 2019-2019.All rights reserved.
  */
 
-package cn.snowpic.year_2019.month_12.month_12.day_27;
+package cn.snowpic.year_2019.month_12.day_27;
 
 import org.junit.Test;
 
@@ -96,6 +96,9 @@ public class GenericTest {
 
     /**
      * max multiply
+     * find a bug...
+     *
+     * @see cn.snowpic.year_2021.month_02.day_04.GenericTest#findThreeMaxProd2(int[])
      * @author lf
      * @time 2019/12/27 21:26
      * @param array array

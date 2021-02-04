@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_06.month_06.day_17;
+package cn.snowpic.year_2019.month_06.day_17;
 
 import org.junit.Assert;
 import org.junit.Test;

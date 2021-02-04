@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_07.month_07.day_25;
+package cn.snowpic.year_2019.month_07.day_25;
 
 import com.sun.istack.internal.NotNull;
 import org.junit.Assert;

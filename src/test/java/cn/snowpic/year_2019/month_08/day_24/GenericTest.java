@@ -1,4 +1,4 @@
-package cn.snowpic.year_2019.month_08.month_08.day_24;
+package cn.snowpic.year_2019.month_08.day_24;
 
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.EventHandler;
