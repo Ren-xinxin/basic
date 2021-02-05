@@ -37,6 +37,9 @@ public class GenericTest {
     public void test2() {
         System.out.println(getMaxAvg(new int[]{1, 12, -5, -6, 50, 3}, 4));
         System.out.println(getMaxAvg(new int[]{1, 12, -5, -6, 50, 3}, 3));
+
+        System.out.println(getMaxAvg2(new int[]{1, 12, -5, -6, 50, 3}, 4));
+        System.out.println(getMaxAvg2(new int[]{1, 12, -5, -6, 50, 3}, 3));
     }
 
     private double getMaxAvg(int[] nums, int len) {
@@ -49,6 +52,21 @@ public class GenericTest {
             double avg = temp * 1.0 / len;
             if (avg > max) {
                 max = avg;
+            }
+        }
+        return max;
+    }
+
+    private double getMaxAvg2(int[] nums, int k) {
+        double max = Double.MIN_VALUE;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i >= k) {
+                sum -= nums[i - k];
+            }
+            sum += nums[i];
+            if (i + 1 >= k) {
+                max = Math.max(max, sum * 1.0 / k);
             }
         }
         return max;
