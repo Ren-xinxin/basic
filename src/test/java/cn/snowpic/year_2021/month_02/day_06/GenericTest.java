@@ -13,6 +13,8 @@ public class GenericTest {
     public void test1() {
         System.out.println(Arrays.deepToString(smoothPicture(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}})));
         System.out.println(Arrays.deepToString(smoothPicture(new int[][]{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}})));
+        System.out.println(Arrays.deepToString(smoothPicture2(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}})));
+        System.out.println(Arrays.deepToString(smoothPicture2(new int[][]{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}})));
     }
 
     private int[][] smoothPicture(int[][] origin) {
@@ -37,5 +39,63 @@ public class GenericTest {
             }
         }
         return result;
+    }
+
+    private int[][] smoothPicture2(int[][] origin) {
+        int[][] result = origin.clone();
+        for (int i = 0; i < origin.length; i++) {
+            for (int j = 0; j < origin[0].length; j++) {
+                bfs(origin, result, i, j);
+            }
+        }
+        return result;
+    }
+
+    private void bfs(int[][] origin, int[][] result, int i, int j) {
+        int xLen = origin.length;
+        int yLen = origin[0].length;
+        int divisor = 1;
+        int sum = origin[i][j];
+        // left up
+        if (i - 1 >= 0 && j - 1 >= 0) {
+            sum += origin[i - 1][j - 1];
+            divisor++;
+        }
+        // up
+        if (j - 1 >= 0) {
+            sum += origin[i][j - 1];
+            divisor++;
+        }
+        // right up
+        if (i + 1 <= xLen - 1 && j - 1 >= 0) {
+            sum += origin[i + 1][j - 1];
+            divisor++;
+        }
+        // left
+        if (i - 1 >= 0) {
+            sum += origin[i - 1][j];
+            divisor++;
+        }
+        // right
+        if (i + 1 <= xLen - 1) {
+            sum += origin[i + 1][j];
+            divisor++;
+        }
+        // left down
+        if (i - 1 >= 0 && j + 1 <= yLen - 1) {
+            sum += origin[i - 1][j + 1];
+            divisor++;
+        }
+        // down
+        if (j + 1 <= yLen - 1) {
+            sum += origin[i][j + 1];
+            divisor++;
+        }
+        // right down
+        if (i + 1 < xLen - 1 && j + 1 <= yLen - 1) {
+            sum += origin[i + 1][j + 1];
+            divisor++;
+        }
+        result[i][j] = Math.floorDiv(sum, divisor);
     }
 }
