@@ -24,4 +24,26 @@ public class GenericTest {
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
+
+    @Test
+    public void test2() {
+        int num = getMaxIncreaseSubarray(new int[]{1, 3, 5, 4, 7});
+        System.out.println(num);
+        System.out.println(getMaxIncreaseSubarray(new int[]{2, 2, 2, 2, 2}));
+    }
+
+    private int getMaxIncreaseSubarray(int[] array) {
+        int count = 1;
+        int max = Integer.MIN_VALUE;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[i - 1]) {
+                count++;
+            } else {
+                max = Math.max(count, max);
+                count = 0;
+            }
+        }
+        max = Math.max(count, max);
+        return max;
+    }
 }
