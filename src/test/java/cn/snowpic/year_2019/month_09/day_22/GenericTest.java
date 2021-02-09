@@ -2,8 +2,7 @@ package cn.snowpic.year_2019.month_09.day_22;
 
 import org.junit.Test;
 
-import javafx.scene.paint.*;
-
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -98,7 +97,7 @@ public class GenericTest {
      */
     @Test
     public void test6() {
-        Context context = new Context(Color.PURPLE);
+        Context context = new Context(Color.PINK);
         State state1 = context.pull();
         System.out.println("state1 = " + state1);
         State state2 = context.push();
@@ -166,7 +165,7 @@ class Visitor implements IVisit {
 
 abstract class State {
 
-    protected final List<Color> colors = Arrays.asList(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN, Color.PURPLE);
+    protected final List<Color> colors = Arrays.asList(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN, Color.PINK);
 
     public abstract State pull();
 

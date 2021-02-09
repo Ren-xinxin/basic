@@ -1,6 +1,5 @@
 package cn.snowpic.year_2019.month_07.day_25;
 
-import com.sun.istack.internal.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,7 +27,7 @@ public class GenericTest {
         m1("some message....");
     }
 
-    private static void m1(@NotNull String msg) {
+    private static void m1(String msg) {
         Assert.assertNotNull("params must not be null !", msg);
         System.out.println(msg);
     }
@@ -41,7 +40,7 @@ public class GenericTest {
     }
 
     @Test
-    public void test4(){
+    public void test4() {
         System.out.println("Intellij IDEA ultimate.....");
         System.out.println("I am confused about something..");
         System.out.println("I have got a job in isoftstone,but I am actually unhappy.I don't know why...");
