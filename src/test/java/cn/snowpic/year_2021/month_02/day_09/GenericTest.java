@@ -33,4 +33,30 @@ public class GenericTest {
         }
         return count;
     }
+
+    @Test
+    public void test2() {
+        System.out.println(divideApples(3, 3));
+        System.out.println(divideApples(4, 4));
+        System.out.println(divideApples(5, 5));
+        System.out.println(divideApples(6, 6));
+    }
+
+    private int divideApples(int apples, int dishes) {
+        int[][] arr = new int[apples + 1][dishes + 1];
+        for (int i = 0; i <= apples; i++) {
+            for (int j = 0; j <= dishes; j++) {
+                if (i <= 1 || j <= 1) {
+                    arr[i][j] = 1;
+                    continue;
+                }
+                if (i < j) {
+                    arr[i][j] = arr[i][i];
+                } else {
+                    arr[i][j] = arr[i - j][j] + arr[i][j - 1];
+                }
+            }
+        }
+        return arr[apples][dishes];
+    }
 }
