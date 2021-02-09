@@ -40,6 +40,11 @@ public class GenericTest {
         System.out.println(divideApples(4, 4));
         System.out.println(divideApples(5, 5));
         System.out.println(divideApples(6, 6));
+        System.out.println("===============================");
+        System.out.println(divideApples2(3, 3));
+        System.out.println(divideApples2(4, 4));
+        System.out.println(divideApples2(5, 5));
+        System.out.println(divideApples2(6, 6));
     }
 
     private int divideApples(int apples, int dishes) {
@@ -58,5 +63,16 @@ public class GenericTest {
             }
         }
         return arr[apples][dishes];
+    }
+
+    private int divideApples2(int apples, int dishes) {
+        if (apples <= 1 || dishes <= 1) {
+            return 1;
+        }
+        if (apples < dishes) {
+            return divideApples2(apples, apples);
+        } else {
+            return divideApples2(apples - dishes, dishes) + divideApples2(apples, dishes - 1);
+        }
     }
 }
