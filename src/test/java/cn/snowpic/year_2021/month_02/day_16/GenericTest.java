@@ -35,4 +35,29 @@ public class GenericTest {
         }
         return index == lastIndex;
     }
+
+    @Test
+    public void test2() {
+        System.out.println(findPivot(new int[]{1, 7, 3, 6, 5, 6}));
+        System.out.println(findPivot(new int[]{1, 2, 3}));
+    }
+
+    private int findPivot(int[] array) {
+        int sum = 0;
+        for (int num : array) {
+            sum += num;
+        }
+        int index = 0;
+        int left = 0;
+        while (index < array.length) {
+            int curr = array[index];
+            int right = sum - left - curr;
+            if (right == left) {
+                return index;
+            }
+            left += curr;
+            index++;
+        }
+        return -1;
+    }
 }
