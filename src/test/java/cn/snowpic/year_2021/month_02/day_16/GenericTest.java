@@ -8,6 +8,8 @@ public class GenericTest {
     public void test1() {
         System.out.println(checkLastOneBit(new int[]{1, 0, 0}));
         System.out.println(checkLastOneBit(new int[]{1, 1, 1, 0}));
+        System.out.println(checkLastOneBit2(new int[]{1, 0, 0}));
+        System.out.println(checkLastOneBit2(new int[]{1, 1, 1, 0}));
     }
 
     private boolean checkLastOneBit(int[] array) {
@@ -19,5 +21,18 @@ public class GenericTest {
             }
         }
         return false;
+    }
+
+    private boolean checkLastOneBit2(int[] array) {
+        int index = 0;
+        int lastIndex = array.length - 1;
+        while (index < lastIndex) {
+            if (array[index] == 1) {
+                index += 2;
+            } else {
+                index++;
+            }
+        }
+        return index == lastIndex;
     }
 }
