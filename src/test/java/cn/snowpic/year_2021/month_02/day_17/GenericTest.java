@@ -3,6 +3,10 @@ package cn.snowpic.year_2021.month_02.day_17;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GenericTest {
 
@@ -53,5 +57,29 @@ public class GenericTest {
             }
         }
         return true;
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(countSubdomainVisit(new String[]{"9001 discuss.leetcode.com"}));
+        System.out.println(countSubdomainVisit(new String[]{"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com",
+                "5 wiki.org"}));
+    }
+
+    private List<String> countSubdomainVisit(String[] origin) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String str : origin) {
+            String[] split = str.split(" ");
+            int index = -1;
+            String domain = split[1];
+            int count = Integer.parseInt(split[0]);
+            map.merge(domain, count, Integer::sum);
+            while ((index = domain.indexOf(".", index + 1)) != -1) {
+                String key = domain.substring(index + 1);
+                map.merge(key, count, Integer::sum);
+            }
+        }
+        return map.entrySet().stream().map(entry -> entry.getValue() + " " + entry.getKey())
+                .collect(Collectors.toList());
     }
 }
