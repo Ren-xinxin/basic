@@ -23,7 +23,6 @@ public class GenericTest {
         }
         int finalMax = max;
         return Arrays.stream(array)
-                .anyMatch(num -> num != 0 && num != finalMax && (finalMax % num != 0 || finalMax / num < 2))
-                ? -1 : index;
+                .anyMatch(num -> num != 0 && num != finalMax && finalMax / num < 2) ? -1 : index;
     }
 }
