@@ -17,25 +17,14 @@ public class GenericTest {
     }
 
     private int[] findExchangeIndexes(int[] candies1, int[] candies2) {
-        return findExchangeIndexes(candies1, candies2, false);
-    }
-
-    private int[] findExchangeIndexes(int[] candies1, int[] candies2, boolean isReversed) {
         int sum1 = Arrays.stream(candies1).sum();
         int sum2 = Arrays.stream(candies2).sum();
-        if (sum1 < sum2) {
-            return findExchangeIndexes(candies2, candies1, true);
-        }
         Set<Integer> set = Arrays.stream(candies2).boxed().collect(Collectors.toSet());
         int diff = sum1 - sum2;
         for (int candy : candies1) {
             int other = (2 * candy - diff) / 2;
             if (set.contains(other)) {
-                if (isReversed) {
-                    return new int[]{other, candy};
-                } else {
-                    return new int[]{candy, other};
-                }
+                return new int[]{candy, other};
             }
         }
         return new int[]{-1, -1};
