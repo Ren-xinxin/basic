@@ -1,0 +1,43 @@
+package cn.snowpic.year_2021.month_02.day_21;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class GenericTest {
+
+    @Test
+    public void test1() {
+        System.out.println(Arrays.toString(findExchangeIndexes(new int[]{1, 1}, new int[]{2, 2})));
+        System.out.println(Arrays.toString(findExchangeIndexes(new int[]{1, 2}, new int[]{2, 3})));
+        System.out.println(Arrays.toString(findExchangeIndexes(new int[]{2}, new int[]{1, 3})));
+        System.out.println(Arrays.toString(findExchangeIndexes(new int[]{1, 2, 5}, new int[]{2, 4})));
+    }
+
+    private int[] findExchangeIndexes(int[] candies1, int[] candies2) {
+        return findExchangeIndexes(candies1, candies2, false);
+    }
+
+    private int[] findExchangeIndexes(int[] candies1, int[] candies2, boolean isReversed) {
+        int sum1 = Arrays.stream(candies1).sum();
+        int sum2 = Arrays.stream(candies2).sum();
+        if (sum1 < sum2) {
+            return findExchangeIndexes(candies2, candies1, true);
+        }
+        Set<Integer> set = Arrays.stream(candies2).boxed().collect(Collectors.toSet());
+        int diff = sum1 - sum2;
+        for (int candy : candies1) {
+            int other = (2 * candy - diff) / 2;
+            if (set.contains(other)) {
+                if (isReversed) {
+                    return new int[]{other, candy};
+                } else {
+                    return new int[]{candy, other};
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+}
