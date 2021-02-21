@@ -20,9 +20,12 @@ public class GenericTest {
         int sum1 = Arrays.stream(candies1).sum();
         int sum2 = Arrays.stream(candies2).sum();
         Set<Integer> set = Arrays.stream(candies2).boxed().collect(Collectors.toSet());
-        int diff = sum1 - sum2;
+        // sum1 - sum2 = x
+        // sum1 - candy + other  = sum2 + candy - other
+        // sum1 - sum2 = (candy - other) * 2
+        int diff = (sum1 - sum2) / 2;
         for (int candy : candies1) {
-            int other = (2 * candy - diff) / 2;
+            int other = candy - diff;
             if (set.contains(other)) {
                 return new int[]{candy, other};
             }
