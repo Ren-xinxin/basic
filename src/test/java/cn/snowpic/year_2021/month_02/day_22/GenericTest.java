@@ -27,14 +27,12 @@ public class GenericTest {
         if (flag) {
             return true;
         }
-        flag = true;
         index = array.length - 1;
         for (int i : array) {
             if (i != clone[index--]) {
-                flag = false;
-                break;
+                return false;
             }
         }
-        return flag;
+        return true;
     }
 }
