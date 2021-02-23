@@ -16,18 +16,21 @@ public class GenericTest {
 
     private int[] sortByParity(int[] array) {
         int left = 0, right = array.length - 1;
+        outer:
         while (left < right) {
-            while (array[left] % 2 == 0 && left < array.length - 1) {
-                left++;
+            while (array[left] % 2 == 0) {
+                if (++left >= right) {
+                    break outer;
+                }
             }
-            while (array[right] % 2 != 0 && right > 0) {
-                right--;
+            while (array[right] % 2 != 0) {
+                if (--right <= left) {
+                    break outer;
+                }
             }
-            if (left < right) {
-                int temp = array[left];
-                array[left] = array[right];
-                array[right] = temp;
-            }
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
         }
         return array;
     }
@@ -37,9 +40,9 @@ public class GenericTest {
         int left = 0, right = array.length - 1;
         for (int num : array) {
             if (num % 2 == 0) {
-                array[left++] = num;
+                result[left++] = num;
             } else {
-                array[right--] = num;
+                result[right--] = num;
             }
         }
         return result;
