@@ -2,7 +2,7 @@
  * Copyright(c) snowpic.cn 2019-2020.All rights reserved.
  */
 
-package cn.snowpic.year_2020.month_02.month_02.day_10;
+package cn.snowpic.year_2020.month_02.day_10;
 
 import org.eclipse.jetty.util.BlockingArrayQueue;
 import org.junit.Test;

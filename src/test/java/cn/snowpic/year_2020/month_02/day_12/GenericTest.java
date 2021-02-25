@@ -2,7 +2,7 @@
  * Copyright(c) snowpic.cn 2019-2020.All rights reserved.
  */
 
-package cn.snowpic.year_2020.month_02.month_02.day_12;
+package cn.snowpic.year_2020.month_02.day_12;
 
 import org.junit.Test;
 
