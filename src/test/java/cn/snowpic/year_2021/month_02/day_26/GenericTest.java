@@ -3,6 +3,7 @@ package cn.snowpic.year_2021.month_02.day_26;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +20,8 @@ public class GenericTest {
 
     private List<List<Integer>> findSumOfNums(int[] nums) {
         result = new ArrayList<>();
-        dfs(nums, new ArrayList<>(), new boolean[nums.length]);
+        int[] container = new int[3];
+        dfs(nums, container, 0, new boolean[nums.length]);
         return result.stream().distinct().sorted((s1, s2) -> {
             int index = 0, c = 0;
             while (index < 3 && (c = s1.get(index).compareTo(s2.get(index))) == 0) {
@@ -29,11 +31,10 @@ public class GenericTest {
         }).collect(Collectors.toList());
     }
 
-    private void dfs(int[] nums, List<Integer> curr, boolean[] used) {
-        if (curr.size() == 3) {
-            Collections.sort(curr);
-            if (curr.stream().mapToInt(Integer::intValue).sum() == 0) {
-                result.add(new ArrayList<>(curr));
+    private void dfs(int[] nums, int[] container, int len, boolean[] used) {
+        if (len == 3) {
+            if (Arrays.stream(container).sum() == 0) {
+                result.add(Arrays.stream(container).sorted().boxed().collect(Collectors.toList()));
             }
             return;
         }
@@ -42,9 +43,8 @@ public class GenericTest {
                 continue;
             }
             used[i] = true;
-            curr.add(nums[i]);
-            dfs(nums, curr, used);
-            curr.remove(curr.size() - 1);
+            container[len] = nums[i];
+            dfs(nums, container, len + 1, used);
             used[i] = false;
         }
     }
