@@ -50,10 +50,21 @@ public class GenericTest {
 
     @Test
     public void test2() {
-        System.out.println(getPermutations(4));
+        System.out.println(getPermutations(4).size());
+        System.out.println(getPermutations(3));
         System.out.println(getPermutations(8).size());
+        long start = System.currentTimeMillis();
         System.out.println(getPermutations(9).size());
+        System.out.println("cost:" + (System.currentTimeMillis() - start));
         System.out.println(getPermutations(1));
+        System.out.println("=======================");
+        System.out.println(getPermutations2(4).size());
+        System.out.println(getPermutations2(3));
+        System.out.println(getPermutations2(8).size());
+        start = System.currentTimeMillis();
+        System.out.println(getPermutations2(9).size());
+        System.out.println("cost:" + (System.currentTimeMillis() - start));
+        System.out.println(getPermutations2(1));
     }
 
     private List<List<Integer>> getPermutations(int num) {
@@ -106,5 +117,31 @@ public class GenericTest {
 
     private void addPermutation(int[] nums) {
         permutations.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+    }
+
+    private List<List<Integer>> getPermutations2(int num) {
+        permutations = new ArrayList<>();
+        int[] nums = new int[num];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = i + 1;
+        }
+        perDfs(nums, 0, new int[num], new boolean[num]);
+        return permutations;
+    }
+
+    private void perDfs(int[] nums, int curr, int[] container, boolean[] used) {
+        if (curr == nums.length) {
+            addPermutation(container);
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+            used[i] = true;
+            container[curr] = nums[i];
+            perDfs(nums, curr + 1, container, used);
+            used[i] = false;
+        }
     }
 }
