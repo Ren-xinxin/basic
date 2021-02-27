@@ -2,7 +2,10 @@ package cn.snowpic.year_2021.month_02.day_27;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GenericTest {
     private int result;
@@ -41,5 +44,67 @@ public class GenericTest {
             dfs(nums, container, len + 1, used);
             used[i] = false;
         }
+    }
+
+    private List<List<Integer>> permutations;
+
+    @Test
+    public void test2() {
+        System.out.println(getPermutations(4));
+        System.out.println(getPermutations(8).size());
+        System.out.println(getPermutations(9).size());
+        System.out.println(getPermutations(1));
+    }
+
+    private List<List<Integer>> getPermutations(int num) {
+        permutations = new ArrayList<>();
+        int[] nums = new int[num];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = i + 1;
+        }
+        outer:
+        while (true) {
+            addPermutation(nums);
+            if (nums.length < 2) {
+                break;
+            }
+            int index1 = nums.length - 1;
+            int index2 = index1;
+            for (int i = nums.length - 2; i >= 0; i--) {
+                if (nums[i] < nums[i + 1]) {
+                    index1 = i;
+                    break;
+                }
+                if (i == 0) {
+                    break outer;
+                }
+            }
+            for (int i = nums.length - 1; i >= 0; i--) {
+                if (nums[i] > nums[index1]) {
+                    index2 = i;
+                    break;
+                }
+            }
+            swap(nums, index1, index2);
+            reverse(nums, index1 + 1);
+        }
+        return permutations;
+    }
+
+    private void reverse(int[] nums, int index) {
+        int left = index, right = nums.length - 1;
+        while (left < right) {
+            swap(nums, left++, right--);
+        }
+    }
+
+    private void swap(int[] nums, int index1, int index2) {
+        int temp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = temp;
+    }
+
+    private void addPermutation(int[] nums) {
+        permutations.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
     }
 }
