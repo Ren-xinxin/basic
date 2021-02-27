@@ -2,6 +2,7 @@ package cn.snowpic.year_2021.month_02.day_27;
 
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -143,5 +144,37 @@ public class GenericTest {
             perDfs(nums, curr + 1, container, used);
             used[i] = false;
         }
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(getGcd("12", "8"));
+        System.out.println(getGcd2(12, 8));
+    }
+
+    private String getGcd(String num1, String num2) {
+        BigInteger bi1 = new BigInteger(num1);
+        BigInteger bi2 = new BigInteger(num2);
+        if (bi1.compareTo(bi2) < 0) {
+            return getGcd(num2, num1);
+        }
+        BigInteger mod;
+        while ((mod = bi1.mod(bi2)).intValue() != 0) {
+            bi1 = bi2;
+            bi2 = mod;
+        }
+        return bi2.toString();
+    }
+
+    private int getGcd2(int num1, int num2) {
+        if (num1 < num2) {
+            return getGcd2(num2, num1);
+        }
+        int mod;
+        while ((mod = num1 % num2) != 0) {
+            num1 = num2;
+            num2 = mod;
+        }
+        return num2;
     }
 }
