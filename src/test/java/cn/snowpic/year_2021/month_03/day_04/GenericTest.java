@@ -3,6 +3,8 @@ package cn.snowpic.year_2021.month_03.day_04;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -30,11 +32,11 @@ public class GenericTest {
         this.target = target;
         this.result = new ArrayList<>();
         this.used = new boolean[nums.length];
-        dfs(new ArrayList<>());
+        dfs(new LinkedList<>());
         return result.stream().distinct().collect(Collectors.toList());
     }
 
-    private void dfs(List<Integer> curr) {
+    private void dfs(Deque<Integer> curr) {
         counter.getAndIncrement();
         int sum = curr.stream().mapToInt(Integer::intValue).sum();
         if (sum >= target) {
@@ -48,10 +50,10 @@ public class GenericTest {
                 continue;
             }
             used[i] = true;
-            curr.add(input[i]);
+            curr.push(input[i]);
             dfs(curr);
             used[i] = false;
-            curr.remove(curr.size() - 1);
+            curr.pop();
         }
     }
 }
