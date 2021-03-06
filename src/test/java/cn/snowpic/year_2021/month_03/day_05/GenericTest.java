@@ -16,16 +16,17 @@ public class GenericTest {
     }
 
     private void rotateImage(int[][] img) {
-        int len = img.length - 1;
+        int totalLen = img.length - 1;
+        int columnLimit = totalLen;
         int row = 0;
-        while (len > 0) {
+        while (row <= img.length / 2) {
             int column = row;
-            while (column < img[0].length - 1) {
-                setValue(img, row, column, 0, len, img[row][column]);
+            while (column < columnLimit) {
+                setValue(img, row, column, 0, totalLen, img[row][column]);
                 column++;
             }
             row++;
-            len -= 2;
+            columnLimit--;
         }
     }
 
